@@ -1,0 +1,49 @@
+{
+  "name": "static-site",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": {
+    "name": "Fred Stoddart",
+    "email": "freddiestoddart@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwed/Constructs.git"
+  },
+  "license": "ISC",
+  "scripts": {
+    "build": "jsii",
+    "build:watch": "jsii -w",
+    "package": "jsii-pacmak",
+    "test": "tsc && jest",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "aws-cdk-lib": "2.7.0",
+    "constructs": "^10.0.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "typescript": "~3.9.7"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": "2.7.0",
+    "constructs": "^10.0.0"
+  },
+  "stability": "experimental",
+  "jsii": {
+    "outdir": "dist",
+    "versionFormat": "short",
+    "targets": {
+      "python": {
+        "distName": "pwed-constructs.static-site",
+        "module": "pwed-constructs.static-site"
+      },
+	  "go" : {
+		  "moduleName": "github.com/pwed/go-constructs/static-site"
+	  }
+    }
+  }
+}

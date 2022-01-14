@@ -1,0 +1,11 @@
+*.js
+tsconfig.json
+*.js.map
+!jest.config.js
+*.d.ts
+node_modules
+.jsii
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
