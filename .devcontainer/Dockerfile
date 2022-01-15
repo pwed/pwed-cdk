@@ -1,4 +1,7 @@
-FROM jsii/superchain:1-buster-slim
+FROM jsii/superchain:1-buster-slim-node16
 
-RUN sudo npm install -g cdk jsii jsii-pacmak lerna typescript
+USER root:root
 
+RUN npm install -g cdk jsii jsii-pacmak lerna typescript
+
+USER superchain:superchain

@@ -20,6 +20,7 @@
     "watch": "tsc -w"
   },
   "devDependencies": {
+    "@types/glob": "^7.2.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
     "aws-cdk-lib": "2.7.0",
@@ -32,6 +33,9 @@
     "aws-cdk-lib": "2.7.0",
     "constructs": "^10.0.0"
   },
+  "bundledDependencies": [
+    "glob"
+  ],
   "stability": "experimental",
   "jsii": {
     "outdir": "dist",
@@ -41,9 +45,12 @@
         "distName": "pwed-constructs.static-site",
         "module": "pwed-constructs.static-site"
       },
-	  "go" : {
-		  "moduleName": "github.com/pwed/go-constructs/static-site"
-	  }
+      "go": {
+        "moduleName": "github.com/pwed/go-constructs/static-site"
+      }
     }
+  },
+  "dependencies": {
+    "glob": "^7.2.0"
   }
 }
