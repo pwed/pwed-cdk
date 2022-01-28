@@ -15,7 +15,7 @@
   "scripts": {
     "build": "jsii",
     "build:watch": "jsii -w",
-    "package": "jsii-pacmak",
+    "package": "jsii && jsii-pacmak",
     "test": "tsc && jest",
     "watch": "tsc -w"
   },
@@ -46,7 +46,7 @@
         "module": "pwed-constructs.static-site"
       },
       "go": {
-        "moduleName": "github.com/pwed/go-constructs/"
+        "moduleName": "github.com/pwed/go-constructs"
       }
     }
   },
