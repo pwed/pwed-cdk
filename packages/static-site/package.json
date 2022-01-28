@@ -46,7 +46,7 @@
         "module": "pwed-constructs.static-site"
       },
       "go": {
-        "moduleName": "github.com/pwed/go-constructs/static-site"
+        "moduleName": "github.com/pwed/go-constructs/"
       }
     }
   },
