@@ -8,8 +8,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc lib/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "prettier --config .prettierrc 'lib/**/*.ts' --ignore-path '/lib/**/*.d.ts' --write "
   },
   "repository": {
     "type": "git",
@@ -25,19 +26,23 @@
     "url": "https://github.com/pwed/Constructs/issues"
   },
   "homepage": "https://github.com/pwed/Constructs#readme",
-  
   "devDependencies": {
     "@types/glob": "^7.2.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
     "aws-cdk-lib": "2.10.0",
+    "cdk-constants": "3.0.3",
+    "cdk-ec2-key-pair": "3.2.0",
     "constructs": "10.0.0",
     "jest": "^26.4.2",
+    "prettier": "^2.5.1",
     "ts-jest": "^26.2.0",
     "typescript": "~3.9.7"
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.10.0",
+    "cdk-constants": "^3.0.3",
+    "cdk-ec2-key-pair": "^3.2.0",
     "constructs": "^10.0.0"
   },
   "bundledDependencies": [

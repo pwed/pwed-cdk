@@ -6,14 +6,14 @@ import {
   aws_route53_targets,
   aws_s3,
   aws_s3_deployment,
-} from "aws-cdk-lib";
-import { Construct } from "constructs";
-import fs = require("fs");
-import path = require("path");
-import crypto = require("crypto");
-import {sync as globSync} from "glob";
-import process = require("process");
-import child_process = require("child_process");
+} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import fs = require('fs');
+import path = require('path');
+import crypto = require('crypto');
+import { sync as globSync } from 'glob';
+import process = require('process');
+import child_process = require('child_process');
 
 export interface StaticSiteProps {
   readonly domain: string;
@@ -24,15 +24,15 @@ export class StaticSite extends Construct {
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
-    const bucket = new aws_s3.Bucket(this, "bucket");
+    const bucket = new aws_s3.Bucket(this, 'bucket');
 
-    const hostedZone = aws_route53.HostedZone.fromLookup(this, "HostedZone", {
+    const hostedZone = aws_route53.HostedZone.fromLookup(this, 'HostedZone', {
       domainName: props.domain,
     });
 
     const certificate = new aws_certificatemanager.Certificate(
       this,
-      "Certificate",
+      'Certificate',
       {
         domainName: props.domain,
         validation:
@@ -42,11 +42,11 @@ export class StaticSite extends Construct {
 
     const originAccessIdentity = new aws_cloudfront.OriginAccessIdentity(
       this,
-      "OriginAccessIdentity"
+      'OriginAccessIdentity'
     );
     bucket.grantRead(originAccessIdentity);
 
-    const distribution = new aws_cloudfront.Distribution(this, "Distribution", {
+    const distribution = new aws_cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new aws_cloudfront_origins.S3Origin(bucket, {
           originAccessIdentity,
@@ -61,20 +61,20 @@ export class StaticSite extends Construct {
         {
           httpStatus: 404,
           responseHttpStatus: 404,
-          responsePagePath: "/404.html",
+          responsePagePath: '/404.html',
         },
       ],
-      defaultRootObject: "index.html",
+      defaultRootObject: 'index.html',
     });
 
-    new aws_route53.ARecord(this, "AAliasRecord", {
+    new aws_route53.ARecord(this, 'AAliasRecord', {
       recordName: props.domain,
       zone: hostedZone,
       target: aws_route53.RecordTarget.fromAlias(
         new aws_route53_targets.CloudFrontTarget(distribution)
       ),
     });
-    new aws_route53.AaaaRecord(this, "AaaaAliasRecord", {
+    new aws_route53.AaaaRecord(this, 'AaaaAliasRecord', {
       recordName: props.domain,
       zone: hostedZone,
       target: aws_route53.RecordTarget.fromAlias(
@@ -82,19 +82,15 @@ export class StaticSite extends Construct {
       ),
     });
 
-    const hashFile = "/.hashfile"
+    const hashFile = '/.hashfile';
     let invalidations: string[] = [hashFile];
     invalidations.push(
-      ...compareRemoteToLocal(
-        props.domain,
-        hashFile,
-        props.path,
-      )
+      ...compareRemoteToLocal(props.domain, hashFile, props.path)
     );
 
-    console.log("Invalidations:\n", invalidations);
+    console.log('Invalidations:\n', invalidations);
 
-    new aws_s3_deployment.BucketDeployment(this, "HugoDeployment", {
+    new aws_s3_deployment.BucketDeployment(this, 'HugoDeployment', {
       sources: [aws_s3_deployment.Source.asset(props.path)],
       destinationBucket: bucket,
       distribution: distribution,
@@ -110,9 +106,9 @@ function getHashes(globPattern: string, dir: string): Map<string, string> {
   process.chdir(dir);
   gs.forEach(function (file: string) {
     const fileBuffer = fs.readFileSync(file, {});
-    const hashSum = crypto.createHash("sha256");
+    const hashSum = crypto.createHash('sha256');
     hashSum.update(fileBuffer);
-    const hex = hashSum.digest("hex");
+    const hex = hashSum.digest('hex');
     fh.set(file, hex);
   });
   process.chdir(pwd);
@@ -138,16 +134,18 @@ function compareRemoteToLocal(
   localFolder: string
 ): string[] {
   let oldHashesJSON: string;
-  const newHashes = getHashes("**", localFolder);
+  const newHashes = getHashes('**', localFolder);
   fs.writeFileSync(
     path.join(localFolder, hashFile),
     JSON.stringify(Object.fromEntries(newHashes))
   );
   try {
-    oldHashesJSON = child_process.execSync(`curl https://${domain}/${hashFile}`).toString();
+    oldHashesJSON = child_process
+      .execSync(`curl https://${domain}/${hashFile}`)
+      .toString();
   } catch (e) {
-    console.log("error getting file from web", e);
-    return ["/*"];
+    console.log('error getting file from web', e);
+    return ['/*'];
   }
   const oldHashes: Map<string, string> = new Map(
     Object.entries(JSON.parse(oldHashesJSON!))
