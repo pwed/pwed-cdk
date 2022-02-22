@@ -2,6 +2,7 @@ node_modules/
 npm-debug.log
 dist
 .jsii
+tsconfig.json
 tsconfig.tsbuildinfo
 **/*.js
 **/*.js.map
