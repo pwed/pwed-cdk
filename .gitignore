@@ -1,5 +1,8 @@
 node_modules/
-lerna-debug.log
 npm-debug.log
-.idea
-packages/**/dist
+dist
+.jsii
+tsconfig.tsbuildinfo
+**/*.js
+**/*.js.map
+**/*.d.ts

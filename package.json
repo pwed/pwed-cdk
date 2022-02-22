@@ -1,12 +1,63 @@
 {
-  "name": "root",
-  "private": true,
+  "name": "pwed-cdk",
+  "version": "1.0.0",
+  "description": "A library of AWS CDK constructs that I have created",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwed/Constructs.git"
+  },
+  "keywords": [
+    "cdk",
+    "constructs"
+  ],
+  "author": "pwed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pwed/Constructs/issues"
+  },
+  "homepage": "https://github.com/pwed/Constructs#readme",
+  
   "devDependencies": {
-    "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.8",
-    "jest": "^27.4.7",
-    "lerna": "^4.0.0",
-    "ts-jest": "^27.1.2",
-    "typescript": "^4.5.4"
+    "@types/glob": "^7.2.0",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "aws-cdk-lib": "2.10.0",
+    "constructs": "10.0.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "typescript": "~3.9.7"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": "^2.10.0",
+    "constructs": "^10.0.0"
+  },
+  "bundledDependencies": [
+    "glob"
+  ],
+  "dependencies": {
+    "glob": "^7.2.0"
+  },
+  "stability": "experimental",
+  "jsii": {
+    "outdir": "dist",
+    "versionFormat": "short",
+    "targets": {
+      "python": {
+        "distName": "pwed-cdk",
+        "module": "pwed-cdk"
+      },
+      "go": {
+        "moduleName": "github.com/pwed/pwed-cdk-go"
+      }
+    }
   }
 }
