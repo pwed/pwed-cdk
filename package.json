@@ -1,20 +1,21 @@
 {
   "name": "pwed-cdk",
-  "version": "1.0.0",
+  "version": "0.1.24",
   "description": "A library of AWS CDK constructs that I have created",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "build": "tsc lib/index.ts",
+    "prepare": "tsc",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "prettier --config .prettierrc 'lib/**/*.ts' --ignore-path '/lib/**/*.d.ts' --write "
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pwed/Constructs.git"
+    "url": "git+https://github.com:pwed/Constructs.git"
   },
   "keywords": [
     "cdk",
@@ -33,8 +34,12 @@
     "aws-cdk-lib": "2.10.0",
     "cdk-constants": "3.0.3",
     "cdk-ec2-key-pair": "3.2.0",
-    "constructs": "10.0.0",
+    "constructs": "10.0.47",
+    "glob": "7.2.0",
     "jest": "^26.4.2",
+    "jsii": "^1.54.0",
+    "jsii-pacmak": "^1.54.0",
+    "jsii-release": "^0.2.271",
     "prettier": "^2.5.1",
     "ts-jest": "^26.2.0",
     "typescript": "~3.9.7"
@@ -43,26 +48,8 @@
     "aws-cdk-lib": "^2.10.0",
     "cdk-constants": "^3.0.3",
     "cdk-ec2-key-pair": "^3.2.0",
-    "constructs": "^10.0.0"
-  },
-  "bundledDependencies": [
-    "glob"
-  ],
-  "dependencies": {
+    "constructs": "^10.0.47",
     "glob": "^7.2.0"
   },
-  "stability": "experimental",
-  "jsii": {
-    "outdir": "dist",
-    "versionFormat": "short",
-    "targets": {
-      "python": {
-        "distName": "pwed-cdk",
-        "module": "pwed-cdk"
-      },
-      "go": {
-        "moduleName": "github.com/pwed/pwed-cdk-go"
-      }
-    }
-  }
+  "stability": "experimental"
 }

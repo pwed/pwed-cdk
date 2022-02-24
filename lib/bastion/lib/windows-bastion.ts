@@ -4,7 +4,7 @@ import { KeyPair } from 'cdk-ec2-key-pair';
 import { ManagedPolicies } from 'cdk-constants';
 import { Constants } from './constants';
 
-interface WindowsBastionProps {
+export interface WindowsBastionProps {
   securityTag?: Tag;
   createKeyPair?: boolean;
   vpc: aws_ec2.IVpc;
@@ -64,58 +64,28 @@ export class WindowsBastion extends Construct {
       userDataCausesReplacement: true,
     });
 
-    const userData = aws_ec2.UserData.forWindows();
+    const windowsPackages = props.windowsPackages ? props.windowsPackages : []
 
-    userData.addCommands(
-      'function Retry-Command {',
-      '    [CmdletBinding()]',
-      '    Param(',
-      '        [Parameter(Position=0, Mandatory=$true)]',
-      '        [scriptblock]$ScriptBlock,',
-      '',
-      '        [Parameter(Position=1, Mandatory=$false)]',
-      '        [int]$Maximum = 5,',
-      '',
-      '        [Parameter(Position=2, Mandatory=$false)]',
-      '        [int]$Delay = 100',
-      '    )',
-      '',
-      '    Begin {',
-      '        $cnt = 0',
-      '    }',
-      '',
-      '    Process {',
-      '        do {',
-      '            $cnt++',
-      '            try {',
-      '                $ScriptBlock.Invoke()',
-      '                return',
-      '            } catch {',
-      '                Write-Error $_.Exception.InnerException.Message -ErrorAction Continue',
-      '                Start-Sleep -Seconds $Delay',
-      '            }',
-      '        } while ($cnt -lt $Maximum)',
-      '',
-      "        # Throw an error after $Maximum unsuccessful invocations. Doesn't need",
-      '        # a condition, since the function returns upon successful invocation.',
-      "        throw 'Execution failed.'",
-      '    }',
+    const userData = [
+      'for($i=1; $i -le 10; $i++) {',
+      '  reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\InProgress',
+      '  if ($LASTEXITCODE -ne 0 ) {',
+      '    Write-Output "No installer is running, continuing"',
+      '    break',
+      '  }',
+      '  Write-Output "Another installer is running, waiting ($i / 10)"',
+      '  Start-Sleep -Seconds 15',
       '}',
       // Unfortunately Windows Server 2022 doesn't support WinGet yet ...
       // https://github.com/microsoft/winget-cli/issues/1929
-      'iwr -UseBasicParsing https://github.com/jedieaston/winget-build/raw/main/Install.ps1 | iex'
-    );
+      'iwr -UseBasicParsing https://github.com/jedieaston/winget-build/raw/main/Install.ps1 | iex',
+      ...windowsPackages.map((p) => {
+        return `wingetdev install --silent --accept-source-agreements --accept-package-agreements ${p}`;
+      }),
+      'wingetdev upgrade --all --silent --accept-source-agreements --accept-package-agreements',
+    ].join('\n');
 
-    if (props?.windowsPackages) {
-      userData.addCommands(
-        ...props.windowsPackages.map((p) => {
-          // Needs more tweaking some packages are failing to install
-          return `Retry-Command -ScriptBlock { wingetdev install --silent --accept-source-agreements --accept-package-agreements ${p} } -Maximum 5 -Delay 15`;
-        })
-      );
-    }
-
-    bastionInstance.addUserData(userData.render());
+    bastionInstance.addUserData(userData);
 
     Tags.of(bastionInstance.instance).add(securityTag.key, securityTag.value);
 

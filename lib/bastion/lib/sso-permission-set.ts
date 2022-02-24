@@ -2,7 +2,7 @@ import { aws_iam, aws_sso, Tag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Constants } from './constants';
 
-interface BastionPermissionSetProps {
+export interface BastionPermissionSetProps {
   ssoInstanceArn: string;
   permissionSetName: string;
   sessionDuration?: string;
