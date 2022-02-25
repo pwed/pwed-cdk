@@ -6,6 +6,7 @@ import {
   aws_route53_targets,
   aws_s3,
   aws_s3_deployment,
+  Duration,
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import fs = require('fs');
@@ -17,6 +18,7 @@ import child_process = require('child_process');
 
 export interface StaticSiteProps {
   readonly domain: string;
+  readonly hostedZone?: aws_route53.IHostedZone;
   readonly path: string;
 }
 
@@ -24,11 +26,21 @@ export class StaticSite extends Construct {
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
-    const bucket = new aws_s3.Bucket(this, 'bucket');
-
-    const hostedZone = aws_route53.HostedZone.fromLookup(this, 'HostedZone', {
-      domainName: props.domain,
+    const bucket = new aws_s3.Bucket(this, 'Bucket', {
+      encryption: aws_s3.BucketEncryption.S3_MANAGED,
+      lifecycleRules: [
+        {
+          transitions: [
+            {
+              storageClass: aws_s3.StorageClass.INTELLIGENT_TIERING,
+              transitionAfter: Duration.days(7),
+            },
+          ],
+        },
+      ],
     });
+
+    const hostedZone = props.hostedZone ? props.hostedZone : aws_route53.HostedZone.fromLookup(this, "HostedZone", {domainName: props.domain})
 
     const certificate = new aws_certificatemanager.Certificate(
       this,
@@ -90,7 +102,7 @@ export class StaticSite extends Construct {
 
     console.log('Invalidations:\n', invalidations);
 
-    new aws_s3_deployment.BucketDeployment(this, 'HugoDeployment', {
+    new aws_s3_deployment.BucketDeployment(this, 'StaticDeployment', {
       sources: [aws_s3_deployment.Source.asset(props.path)],
       destinationBucket: bucket,
       distribution: distribution,
@@ -147,8 +159,11 @@ function compareRemoteToLocal(
     console.log('error getting file from web', e);
     return ['/*'];
   }
-  const oldHashes: Map<string, string> = new Map(
-    Object.entries(JSON.parse(oldHashesJSON!))
-  );
+  let oldHashes: Map<string, string>;
+  try {
+    oldHashes = new Map(Object.entries(JSON.parse(oldHashesJSON!)));
+  } catch (e) {
+    return ['/*'];
+  }
   return getInvalidations(oldHashes, newHashes);
 }
