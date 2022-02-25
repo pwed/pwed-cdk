@@ -2,6 +2,11 @@
 
 A library of AWS CDK constructs that I have created
 
+## Disclaimer
+
+This repository is in early development and can be restructured at any time.
+A much higher level of stability will be targeted after 1.0.0 release
+
 ## Install
 
 ``` sh

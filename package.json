@@ -1,6 +1,6 @@
 {
   "name": "pwed-cdk",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "description": "A library of AWS CDK constructs that I have created",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,18 +15,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com:pwed/Constructs.git"
+    "url": "git+https://github.com:pwed/pwed-cdk.git"
   },
   "keywords": [
     "cdk",
-    "constructs"
+    "constructs",
+    "bastion",
+    "AWS SSO",
+    "static site"
   ],
   "author": "pwed",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pwed/Constructs/issues"
+    "url": "https://github.com/pwed/pwed-cdk/issues"
   },
-  "homepage": "https://github.com/pwed/Constructs#readme",
+  "homepage": "https://github.com/pwed/pwed-cdk#readme",
   "devDependencies": {
     "@types/glob": "^7.2.0",
     "@types/jest": "^26.0.10",
