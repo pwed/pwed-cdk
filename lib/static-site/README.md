@@ -1,12 +1,15 @@
-# Welcome to your CDK TypeScript Construct Library project!
+# static-site
 
-You should explore the contents of this project. It demonstrates a CDK Construct Library that includes a construct (`StaticSite`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+Easily deploy a static site backed by s3 and CloudFront
 
-The construct defines an interface (`StaticSiteProps`) to configure the visibility timeout of the queue.
+## Usage
 
-## Useful commands
+``` typescript
+import { pwed_static_site } from "pwed-cdk";
+import * as path from "path";
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
+const website = new pwed_static_site.StaticSite(this, "PwedDotMe", {
+    domain: "pwed.me",
+    path: path.join(__dirname, "static"),
+})
+```
