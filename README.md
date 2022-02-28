@@ -28,3 +28,8 @@ npm i pwed-cdk
 
 1. Non SSO based access for bastion
 2. Hugo extension for static-site to auto build and deploy your static site
+3. Auto push to NPM
+   - github action for running jest
+4. JSII for python
+   - pip publish
+5. readme badges

@@ -24,13 +24,9 @@ export class BastionPermissionSet extends Construct {
 
     this.ssoInstanceArn = props.ssoInstanceArn;
 
-    const accessPolicy = new BastionAccessPolicy(
-      this,
-      'BastionAccessPolicy',
-      {
-        securityTag: this.securityTag,
-      }
-    );
+    const accessPolicy = new BastionAccessPolicy(this, 'BastionAccessPolicy', {
+      securityTag: this.securityTag,
+    });
 
     this.policy = accessPolicy.policy;
 

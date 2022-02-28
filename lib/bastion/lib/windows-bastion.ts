@@ -64,11 +64,11 @@ export class WindowsBastion extends Construct {
       userDataCausesReplacement: true,
     });
 
-    const windowsPackages = props.windowsPackages ? props.windowsPackages : []
+    const windowsPackages = props.windowsPackages ? props.windowsPackages : [];
 
     const userData = [
       'for($i=1; $i -le 10; $i++) {',
-      '  reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\InProgress',
+      '  reg query HKLMSOFTWAREMicrosoftWindowsCurrentVersionInstallerInProgress',
       '  if ($LASTEXITCODE -ne 0 ) {',
       '    Write-Output "No installer is running, continuing"',
       '    break',

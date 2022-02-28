@@ -40,7 +40,11 @@ export class StaticSite extends Construct {
       ],
     });
 
-    const hostedZone = props.hostedZone ? props.hostedZone : aws_route53.HostedZone.fromLookup(this, "HostedZone", {domainName: props.domain})
+    const hostedZone = props.hostedZone
+      ? props.hostedZone
+      : aws_route53.HostedZone.fromLookup(this, 'HostedZone', {
+          domainName: props.domain,
+        });
 
     const certificate = new aws_certificatemanager.Certificate(
       this,
