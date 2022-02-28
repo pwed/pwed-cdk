@@ -10,7 +10,7 @@
   "scripts": {
     "prepare": "tsc",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "clean": "prettier --config .prettierrc 'lib/**/*.ts' --ignore-path '/lib/**/*.d.ts' --write "
   },
   "repository": {
@@ -22,10 +22,12 @@
     "constructs",
     "bastion",
     "AWS SSO",
-    "static site"
+    "static site",
+    "AWS",
+    "Jump Host"
   ],
   "author": "pwed",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/pwed/pwed-cdk/issues"
   },

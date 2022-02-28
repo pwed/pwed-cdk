@@ -1,5 +1,6 @@
 import { aws_iam, aws_sso, Tag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { BastionAccessPolicy } from './access-policy';
 import { Constants } from './constants';
 
 export interface BastionPermissionSetProps {
@@ -23,92 +24,15 @@ export class BastionPermissionSet extends Construct {
 
     this.ssoInstanceArn = props.ssoInstanceArn;
 
-    this.policy = new aws_iam.PolicyDocument({
-      statements: [
-        new aws_iam.PolicyStatement({
-          effect: aws_iam.Effect.ALLOW,
-          actions: [
-            'cloudwatch:DescribeAlarms',
-            'ec2:DescribeInstances',
-            'ec2:DescribeInstanceStatus',
-            'ec2:DescribeSecurityGroup*',
-            'identitystore:DescribeUser',
-            'ssm-guiconnect:CancelConnection',
-            'ssm-guiconnect:GetConnection',
-            'ssm-guiconnect:StartConnection',
-            'ssm:DescribeInstance*',
-            'ssm:GetCommandInvocation',
-            'ssm:GetInventorySchema',
-            'sso:ListDirectoryAssociations*',
-            'rds:Describe*',
-            'secretsmanager:ListSecrets',
-            'kms:ListAliases',
-          ],
-          resources: ['*'],
-        }),
-        new aws_iam.PolicyStatement({
-          effect: aws_iam.Effect.ALLOW,
-          actions: [
-            'ec2:GetPasswordData',
-            'ec2:StartInstances',
-            'ssm:GetConnectionStatus',
-            'ssm:SendCommand',
-            'ssm:StartSession',
-          ],
-          resources: ['arn:aws:ec2:*:*:instance/*'],
-          conditions: {
-            StringEquals: JSON.parse(
-              `{"aws:ResourceTag/${this.securityTag.key}": "${this.securityTag.value}"}`
-            ),
-          },
-        }),
-        new aws_iam.PolicyStatement({
-          effect: aws_iam.Effect.ALLOW,
-          actions: [
-            'secretsmanager:DescribeSecret',
-            'secretsmanager:GetSecretValue',
-          ],
-          resources: ['*'],
-          conditions: {
-            StringEquals: JSON.parse(
-              `{"aws:ResourceTag/${this.securityTag.key}": "${this.securityTag.value}"}`
-            ),
-          },
-        }),
-        new aws_iam.PolicyStatement({
-          effect: aws_iam.Effect.ALLOW,
-          actions: ['ssm:TerminateSession'],
-          resources: ['*'],
-          conditions: {
-            StringLike: {
-              'ssm:resourceTag/aws:ssmmessages:session-id': '${aws:userName}',
-            },
-          },
-        }),
-        new aws_iam.PolicyStatement({
-          effect: aws_iam.Effect.ALLOW,
-          actions: ['ssm:GetDocument'],
-          resources: [
-            'arn:aws:ssm:*:*:document/AWS-StartPortForwardingSession',
-            'arn:aws:ssm:*:*:document/SSM-SessionManagerRunShell',
-          ],
-        }),
-        new aws_iam.PolicyStatement({
-          effect: aws_iam.Effect.ALLOW,
-          actions: ['ssm:SendCommand', 'ssm:StartSession'],
-          resources: [
-            'arn:aws:ssm:*:*:document/AWS-StartPortForwardingSession',
-            'arn:aws:ssm:*:*:document/AWSSSO-CreateSSOUser',
-            'arn:aws:ssm:*:*:managed-instance/*',
-          ],
-          conditions: {
-            BoolIfExists: {
-              'ssm:SessionDocumentAccessCheck': 'true',
-            },
-          },
-        }),
-      ],
-    });
+    const accessPolicy = new BastionAccessPolicy(
+      this,
+      'BastionAccessPolicy',
+      {
+        securityTag: this.securityTag,
+      }
+    );
+
+    this.policy = accessPolicy.policy;
 
     this.permissionSet = new aws_sso.CfnPermissionSet(
       this,
