@@ -1,8 +1,9 @@
 {
   "name": "pwed-cdk",
+  "description": "A library of AWS CDK constructs that I have created",
   "repository": {
     "type": "git",
-    "url": "git@github.com:pwed/pwed-cdk.git"
+    "url": "https://github.com/pwed/pwed-cdk.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -43,6 +44,7 @@
     "aws-cdk-lib": "2.10.0",
     "cdk-constants": "3.0.3",
     "cdk-ec2-key-pair": "3.2.0",
+    "cdk-iam-floyd": "0.300.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-import-resolver-node": "^0.3.6",
@@ -75,6 +77,7 @@
     "glob"
   ],
   "keywords": [
+    "aws",
     "cdk"
   ],
   "main": "lib/index.js",
@@ -121,7 +124,7 @@
     }
   },
   "types": "lib/index.d.ts",
-  "stability": "stable",
+  "stability": "experimental",
   "jsii": {
     "outdir": "dist",
     "targets": {},
