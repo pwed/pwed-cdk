@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import { BastionAccessPolicy } from './access-policy';
 import { Constants } from './constants';
 
-export interface BastionPermissionSetProps {
+export interface IBastionPermissionSetProps {
   ssoInstanceArn: string;
   permissionSetName: string;
   sessionDuration?: string;
@@ -15,7 +15,7 @@ export class BastionPermissionSet extends Construct {
   private permissionSet: aws_sso.CfnPermissionSet;
   private ssoInstanceArn: string;
   securityTag: Tag;
-  constructor(scope: Construct, id: string, props: BastionPermissionSetProps) {
+  constructor(scope: Construct, id: string, props: IBastionPermissionSetProps) {
     super(scope, id);
 
     this.securityTag = props.securityTag
@@ -42,7 +42,7 @@ export class BastionPermissionSet extends Construct {
         sessionDuration: props.sessionDuration ? props.sessionDuration : 'PT8H',
         relayStateType:
           'https://console.aws.amazon.com/systems-manager/managed-instances/rdp-connect',
-      }
+      },
     );
   }
 
@@ -59,7 +59,7 @@ export class BastionPermissionSet extends Construct {
         instanceArn: this.ssoInstanceArn,
         targetType: 'AWS_ACCOUNT',
         targetId: accountId,
-      }
+      },
     );
   }
 }

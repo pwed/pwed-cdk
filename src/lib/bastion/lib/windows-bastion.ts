@@ -1,10 +1,10 @@
 import { Aws, aws_ec2, aws_iam, Tag, Tags } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-import { KeyPair } from 'cdk-ec2-key-pair';
 import { ManagedPolicies } from 'cdk-constants';
+import { KeyPair } from 'cdk-ec2-key-pair';
+import { Construct } from 'constructs';
 import { Constants } from './constants';
 
-export interface WindowsBastionProps {
+export interface IWindowsBastionProps {
   securityTag?: Tag;
   createKeyPair?: boolean;
   vpc: aws_ec2.IVpc;
@@ -15,7 +15,7 @@ export interface WindowsBastionProps {
 export class WindowsBastion extends Construct {
   securityGroup: aws_ec2.ISecurityGroup;
 
-  constructor(scope: Construct, id: string, props: WindowsBastionProps) {
+  constructor(scope: Construct, id: string, props: IWindowsBastionProps) {
     super(scope, id);
 
     const securityTag = props?.securityTag
@@ -24,9 +24,9 @@ export class WindowsBastion extends Construct {
 
     const key: undefined | KeyPair = props?.createKeyPair
       ? new KeyPair(this, 'KeyPair', {
-          name: `${Aws.STACK_NAME}-${id}-windows-bastion-key`,
-          storePublicKey: false,
-        })
+        name: `${Aws.STACK_NAME}-${id}-windows-bastion-key`,
+        storePublicKey: false,
+      })
       : undefined;
     if (key) Tags.of(key).add(securityTag.key, securityTag.value);
 
@@ -36,16 +36,16 @@ export class WindowsBastion extends Construct {
       {
         vpc: props.vpc,
         allowAllOutbound: true,
-      }
+      },
     );
 
     const bastionInstance = new aws_ec2.Instance(this, 'BastionInstance', {
       instanceType: aws_ec2.InstanceType.of(
         aws_ec2.InstanceClass.C5A,
-        aws_ec2.InstanceSize.XLARGE
+        aws_ec2.InstanceSize.XLARGE,
       ),
       machineImage: aws_ec2.MachineImage.latestWindows(
-        aws_ec2.WindowsVersion.WINDOWS_SERVER_2022_ENGLISH_FULL_BASE
+        aws_ec2.WindowsVersion.WINDOWS_SERVER_2022_ENGLISH_FULL_BASE,
       ),
       vpc: props.vpc,
       vpcSubnets: props.vpcSubnets,
@@ -91,8 +91,8 @@ export class WindowsBastion extends Construct {
 
     bastionInstance.role.addManagedPolicy(
       aws_iam.ManagedPolicy.fromAwsManagedPolicyName(
-        ManagedPolicies.AMAZON_SSM_MANAGED_INSTANCE_CORE
-      )
+        ManagedPolicies.AMAZON_SSM_MANAGED_INSTANCE_CORE,
+      ),
     );
   }
 }
