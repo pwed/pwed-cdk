@@ -1,0 +1,8 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleFileExtensions": ["js"],
+  "roots": [
+    "<rootDir>/lib/static-site/test"
+  ]
+}
