@@ -1458,12 +1458,12 @@ case@1.6.3, case@^1.6.3:
   resolved "https://registry.yarnpkg.com/case/-/case-1.6.3.tgz#0a4386e3e9825351ca2e6216c60467ff5f1ea1c9"
   integrity sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==
 
-cdk-constants@^3.0.3:
+cdk-constants@3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/cdk-constants/-/cdk-constants-3.0.3.tgz#ec7782c2178246f90cd762d2c950d3fce0ef56de"
   integrity sha512-tenkBG3XUQaiT6LCj0cjNhnhSAAiD697oamwXIzZc9JSwg1dqIPUgzFgAzqjuGolBNsqKO8cefsDZm8Aqm/U4Q==
 
-cdk-ec2-key-pair@^3.2.0:
+cdk-ec2-key-pair@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/cdk-ec2-key-pair/-/cdk-ec2-key-pair-3.2.0.tgz#f9b1a46bb8365b64a65ec1c2981bc134ab4b63aa"
   integrity sha512-fTWLYxQrln1ztiBLcGvF1pMHsFckqCSkBai1k25E+qA4PqiSAwAaw7gCo3oETZ6TFKnN6og2gkmmItbzyjZqJw==

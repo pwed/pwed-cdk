@@ -31,7 +31,7 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "Freddie",
+    "name": "Fred Stoddart",
     "email": "pwed@users.noreply.github.com",
     "organization": false
   },
@@ -41,6 +41,8 @@
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "aws-cdk-lib": "2.10.0",
+    "cdk-constants": "3.0.3",
+    "cdk-ec2-key-pair": "3.2.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-import-resolver-node": "^0.3.6",
@@ -60,11 +62,11 @@
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.10.0",
+    "cdk-constants": "^3.0.3",
+    "cdk-ec2-key-pair": "^3.2.0",
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "cdk-constants": "^3.0.3",
-    "cdk-ec2-key-pair": "^3.2.0",
     "cdk-iam-floyd": "0.300.0",
     "glob": "^7.2.0"
   },
@@ -76,7 +78,7 @@
     "cdk"
   ],
   "main": "lib/index.js",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "version": "0.0.0",
   "jest": {
     "testMatch": [
