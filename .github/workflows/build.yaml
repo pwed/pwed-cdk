@@ -1,4 +1,4 @@
-name: pipeline
+name: build
 on: [push]
 jobs:
   Build-and-test:
@@ -21,6 +21,6 @@ jobs:
         run: |
           npm run build
 
-      # - name: Test
-      #   run: |
-      #     npm run test --verbose --maxWorkers=2
+      - name: Test
+        run: |
+          npm run test --verbose --maxWorkers=2

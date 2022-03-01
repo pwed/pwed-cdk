@@ -10,7 +10,7 @@
   "scripts": {
     "prepack": "npx tsc",
     "build": "npx tsc",
-    "test": "npx jest",
+    "test": "npx jest -c jest.config.json",
     "clean": "prettier --config .prettierrc 'lib/**/*.ts' --ignore-path '/lib/**/*.d.ts' --write "
   },
   "repository": {
