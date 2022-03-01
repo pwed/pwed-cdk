@@ -22,6 +22,5 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   // Publishing
   releaseToNpm: true,
-  npmTokenSecret: 'NPM_ACCESS_TOKEN',
 });
 project.synth();
