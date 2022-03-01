@@ -8,7 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "prepack": "npx tsc && npm run test",
+    "prepack": "npx tsc",
     "build": "npx tsc",
     "test": "npx jest",
     "clean": "prettier --config .prettierrc 'lib/**/*.ts' --ignore-path '/lib/**/*.d.ts' --write "
