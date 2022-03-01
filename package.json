@@ -2,15 +2,15 @@
   "name": "pwed-cdk",
   "version": "0.1.27",
   "description": "A library of AWS CDK constructs that I have created",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "prepack": "tsc && npm run test",
-    "build": "tsc",
-    "test": "jest",
+    "prepack": "npx tsc && npm run test",
+    "build": "npx tsc",
+    "test": "npx jest",
     "clean": "prettier --config .prettierrc 'lib/**/*.ts' --ignore-path '/lib/**/*.d.ts' --write "
   },
   "repository": {
