@@ -11,7 +11,7 @@ A much higher level of stability will be targeted after 1.0.0 release
 
 ## Install
 
-``` sh
+```sh
 npm i pwed-cdk
 ```
 

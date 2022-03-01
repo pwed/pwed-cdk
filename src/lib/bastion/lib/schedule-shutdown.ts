@@ -2,14 +2,14 @@ import { aws_iam, aws_ssm, Stack, Tag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Constants } from './constants';
 
-export interface ScheduleShutdownProps {
+export interface IScheduleShutdownProps {
   securityTag?: Tag;
   timezone?: string;
   shutdownSchedule?: string;
 }
 
 export class ScheduleShutdown extends Construct {
-  constructor(scope: Construct, id: string, props?: ScheduleShutdownProps) {
+  constructor(scope: Construct, id: string, props?: IScheduleShutdownProps) {
     super(scope, id);
 
     const securityTag = props?.securityTag
@@ -30,7 +30,7 @@ export class ScheduleShutdown extends Construct {
         scheduleTimezone: props?.timezone
           ? props.timezone
           : 'Australia/Melbourne',
-      }
+      },
     );
 
     const maintanenceTarget = new aws_ssm.CfnMaintenanceWindowTarget(
@@ -45,7 +45,7 @@ export class ScheduleShutdown extends Construct {
           },
         ],
         windowId: maintanenceWindow.ref,
-      }
+      },
     );
 
     const taskRole = new aws_iam.Role(this, 'AutomationRole', {
@@ -58,7 +58,7 @@ export class ScheduleShutdown extends Construct {
               actions: ['ec2:StopInstances'],
               conditions: {
                 StringEquals: JSON.parse(
-                  `{"aws:ResourceTag/${securityTag.Key}": "${securityTag.Value}"}`
+                  `{"aws:ResourceTag/${securityTag.Key}": "${securityTag.Value}"}`,
                 ),
               },
             }),
