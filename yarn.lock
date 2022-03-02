@@ -777,7 +777,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.10":
+"@types/jest@^26.0.24":
   version "26.0.24"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.24.tgz#943d11976b16739185913a1936e0de0c4a7d595a"
   integrity sha512-E/X5Vib8BWqZNRlDxj9vYXhsDwPYbPINqKF9BsnSoon4RQ0D9moEuLD8txgyypFLH7J4+Lho9Nr/c8H0Fi+17w==
@@ -1468,10 +1468,10 @@ cdk-ec2-key-pair@3.2.0:
   resolved "https://registry.yarnpkg.com/cdk-ec2-key-pair/-/cdk-ec2-key-pair-3.2.0.tgz#f9b1a46bb8365b64a65ec1c2981bc134ab4b63aa"
   integrity sha512-fTWLYxQrln1ztiBLcGvF1pMHsFckqCSkBai1k25E+qA4PqiSAwAaw7gCo3oETZ6TFKnN6og2gkmmItbzyjZqJw==
 
-cdk-iam-floyd@0.300.0:
-  version "0.300.0"
-  resolved "https://registry.yarnpkg.com/cdk-iam-floyd/-/cdk-iam-floyd-0.300.0.tgz#1cb165e724b8cfbdf28a63e5f9b5c24c52ba77a2"
-  integrity sha512-BPHzbC8NSpqAB89vP+QxSuF6vhAbKo+3yGc/G5W1R2znN35t9lQJKDysILZ7iXGbwGAQSrB/IYt6ilePtctoaQ==
+cdk-iam-floyd@0.329.0:
+  version "0.329.0"
+  resolved "https://registry.yarnpkg.com/cdk-iam-floyd/-/cdk-iam-floyd-0.329.0.tgz#65f5913cd1af83188123789a3f5387ba792837a7"
+  integrity sha512-cq+JwnBrzc7NWCUwBnmpDMAmCw6UlsHLsiKQaKRnK5yBlHoU2M9gcDTE6PKDNAi6gb23LeY6DPrn0Ik8Ak87aA==
   dependencies:
     "@udondan/common-substrings" "^3.0.2"
     regex-parser "^2.2.11"
@@ -2997,9 +2997,9 @@ has-flag@^4.0.0:
   integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
 
 has-symbols@^1.0.1, has-symbols@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/has-symbols/-/has-symbols-1.0.2.tgz#165d3070c00309752a1236a479331e3ac56f1423"
-  integrity sha512-chXa79rL/UC2KlX17jo3vRGz0azaWEx5tGqZg5pO3NUyEJVB17dMruQlzCCOfUvElghKcm5194+BCRvi2Rv/Gw==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/has-symbols/-/has-symbols-1.0.3.tgz#bb7b2c4349251dce87b125f7bdf874aa7c8b39f8"
+  integrity sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==
 
 has-tostringtag@^1.0.0:
   version "1.0.0"
@@ -4005,7 +4005,7 @@ jest-worker@^26.6.2:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jest@^26.4.2:
+jest@^26.6.3:
   version "26.6.3"
   resolved "https://registry.yarnpkg.com/jest/-/jest-26.6.3.tgz#40e8fdbe48f00dfa1f0ce8121ca74b88ac9148ef"
   integrity sha512-lGS5PXGAzR4RF7V5+XObhqz2KZIDUA1yD0DG6pBVmy10eh0ZIXQImRuzocsI/N2XZ1GrLFwTS27In2i2jlpq1Q==
@@ -4098,10 +4098,10 @@ jsii-diff@^1.54.0:
     typescript "~3.9.10"
     yargs "^16.2.0"
 
-jsii-docgen@^6.1.18:
-  version "6.1.18"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-6.1.18.tgz#4527692ff473839688b720a1b1e052d1ca74375a"
-  integrity sha512-mJQJhH+Ec9lohkWfEmiuQ/SjqAlID4uHMricmVuOfPwVptlyZ8eeynGJPQOJ5CRQ1JOwNHLp3JsSIzidGhRGMQ==
+jsii-docgen@^6.1.19:
+  version "6.1.19"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-6.1.19.tgz#b147c2e88763593591cb04f5d3531a57108eb456"
+  integrity sha512-wntteqk85dcTOPaR41jUktbJ+0Ez0eTkbo8MSzbP6fZpFc7hr4IdGAHomW4tBjWVg/KVQDIRSnUS/7xBuAQDsA==
   dependencies:
     "@jsii/spec" "^1.54.0"
     case "^1.6.3"
@@ -6323,7 +6323,7 @@ trim-newlines@^3.0.0:
   resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-3.0.1.tgz#260a5d962d8b752425b32f3a7db0dcacd176c144"
   integrity sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==
 
-ts-jest@^26.2.0:
+ts-jest@^26.5.6:
   version "26.5.6"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.5.6.tgz#c32e0746425274e1dfe333f43cd3c800e014ec35"
   integrity sha512-rua+rCP8DxpA8b4DQD/6X2HQS8Zy/xzViVYfEs2OQu68tkCuKLV0Md8pmX55+W24uRIyAsf/BajRfxOs+R2MKA==
@@ -6417,7 +6417,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@~3.9.10, typescript@~3.9.7:
+typescript@~3.9.10:
   version "3.9.10"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
   integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
