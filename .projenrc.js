@@ -22,5 +22,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   // Publishing
   releaseToNpm: true,
+  publishToPypi: {
+    distName: 'cdk-pwed',
+    module: 'pwed_cdk',
+  },
 });
 project.synth();
