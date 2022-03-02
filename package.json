@@ -71,10 +71,12 @@
   },
   "dependencies": {
     "cdk-ec2-key-pair": "^3.2.0",
+    "cdk-iam-floyd": "^0.300.0",
     "glob": "^7.2.0"
   },
   "bundledDependencies": [
     "cdk-ec2-key-pair",
+    "cdk-iam-floyd",
     "glob"
   ],
   "keywords": [

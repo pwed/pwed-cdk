@@ -14,7 +14,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   license: 'MIT',
 
   // deps: [],
-  bundledDeps: ['glob', 'cdk-ec2-key-pair'],
+  bundledDeps: ['glob', 'cdk-ec2-key-pair', 'cdk-iam-floyd'],
   peerDeps: [], // * Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: ['cdk-iam-floyd@0.300.0'] /* Build dependencies for this module. */,
