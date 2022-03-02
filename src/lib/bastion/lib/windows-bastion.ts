@@ -1,20 +1,29 @@
-import { Aws, aws_ec2, aws_iam, Tag, Tags } from 'aws-cdk-lib';
+import { Aws, aws_ec2, aws_iam, Resource, Tag, Tags } from 'aws-cdk-lib';
+import { IInstance } from 'aws-cdk-lib/aws-ec2';
 import { KeyPair } from 'cdk-ec2-key-pair';
 import { Construct } from 'constructs';
 import { Constants } from './constants';
 
-export interface IWindowsBastionProps {
-  securityTag?: Tag;
-  createKeyPair?: boolean;
-  vpc: aws_ec2.IVpc;
-  windowsPackages?: string[];
-  vpcSubnets: aws_ec2.SubnetSelection;
+export interface WindowsBastionProps {
+  readonly securityTag?: Tag;
+  readonly createKeyPair?: boolean;
+  readonly vpc: aws_ec2.IVpc;
+  readonly windowsPackages?: string[];
+  readonly vpcSubnets: aws_ec2.SubnetSelection;
 }
 
-export class WindowsBastion extends Construct {
-  securityGroup: aws_ec2.ISecurityGroup;
+export class WindowsBastion extends Resource implements IInstance {
+  readonly securityGroup: aws_ec2.ISecurityGroup;
+  readonly instanceId: string;
+  readonly instanceAvailabilityZone: string;
+  readonly instancePrivateDnsName: string;
+  readonly instancePrivateIp: string;
+  readonly instancePublicDnsName: string;
+  readonly instancePublicIp: string;
+  readonly connections: aws_ec2.Connections;
+  readonly grantPrincipal: aws_iam.IPrincipal;
 
-  constructor(scope: Construct, id: string, props: IWindowsBastionProps) {
+  constructor(scope: Construct, id: string, props: WindowsBastionProps) {
     super(scope, id);
 
     const securityTag = props?.securityTag
@@ -93,5 +102,13 @@ export class WindowsBastion extends Construct {
         'AmazonSSMManagedInstanceCore'
       )
     );
+    this.instanceId = bastionInstance.instanceId;
+    this.instanceAvailabilityZone = bastionInstance.instanceAvailabilityZone;
+    this.instancePrivateDnsName = bastionInstance.instancePrivateDnsName;
+    this.instancePrivateIp = bastionInstance.instancePrivateIp;
+    this.grantPrincipal = bastionInstance.grantPrincipal;
+    this.instancePublicDnsName = bastionInstance.instancePublicDnsName;
+    this.instancePublicIp = bastionInstance.instancePublicIp;
+    this.connections = bastionInstance.connections;
   }
 }

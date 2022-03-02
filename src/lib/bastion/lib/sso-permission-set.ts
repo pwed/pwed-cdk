@@ -3,11 +3,11 @@ import { Construct } from 'constructs';
 import { BastionAccessPolicy } from './access-policy';
 import { Constants } from './constants';
 
-export interface IBastionPermissionSetProps {
-  ssoInstanceArn: string;
-  permissionSetName: string;
-  sessionDuration?: string;
-  securityTag?: Tag;
+export interface BastionPermissionSetProps {
+  readonly ssoInstanceArn: string;
+  readonly permissionSetName: string;
+  readonly sessionDuration?: string;
+  readonly securityTag?: Tag;
 }
 
 export class BastionPermissionSet extends Construct {
@@ -15,7 +15,7 @@ export class BastionPermissionSet extends Construct {
   private permissionSet: aws_sso.CfnPermissionSet;
   private ssoInstanceArn: string;
   securityTag: Tag;
-  constructor(scope: Construct, id: string, props: IBastionPermissionSetProps) {
+  constructor(scope: Construct, id: string, props: BastionPermissionSetProps) {
     super(scope, id);
 
     this.securityTag = props.securityTag

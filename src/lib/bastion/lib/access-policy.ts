@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import { Constants } from './constants';
 
 export interface BastionAccessPolicyProps {
-  securityTag?: Tag;
+  readonly securityTag?: Tag;
 }
 
 export class BastionAccessPolicy extends Construct {
