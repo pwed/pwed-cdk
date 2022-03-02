@@ -42,9 +42,7 @@
     "@types/node": "^12",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
-    "aws-cdk-lib": "2.10.0",
-    "cdk-constants": "3.0.3",
-    "cdk-ec2-key-pair": "3.2.0",
+    "aws-cdk-lib": "2.5.0",
     "cdk-iam-floyd": "0.300.0",
     "constructs": "10.0.5",
     "eslint": "^8",
@@ -68,17 +66,15 @@
     "typescript": "~3.9.7"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.10.0",
-    "cdk-constants": "^3.0.3",
-    "cdk-ec2-key-pair": "^3.2.0",
+    "aws-cdk-lib": "^2.5.0",
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "cdk-iam-floyd": "0.300.0",
+    "cdk-ec2-key-pair": "^3.2.0",
     "glob": "^7.2.0"
   },
   "bundledDependencies": [
-    "cdk-iam-floyd",
+    "cdk-ec2-key-pair",
     "glob"
   ],
   "keywords": [

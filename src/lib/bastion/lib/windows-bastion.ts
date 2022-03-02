@@ -1,5 +1,4 @@
 import { Aws, aws_ec2, aws_iam, Tag, Tags } from 'aws-cdk-lib';
-import { ManagedPolicies } from 'cdk-constants';
 import { KeyPair } from 'cdk-ec2-key-pair';
 import { Construct } from 'constructs';
 import { Constants } from './constants';
@@ -91,7 +90,7 @@ export class WindowsBastion extends Construct {
 
     bastionInstance.role.addManagedPolicy(
       aws_iam.ManagedPolicy.fromAwsManagedPolicyName(
-        ManagedPolicies.AMAZON_SSM_MANAGED_INSTANCE_CORE
+        'AmazonSSMManagedInstanceCore'
       )
     );
   }

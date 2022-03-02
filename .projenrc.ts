@@ -7,19 +7,19 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Fred Stoddart',
   authorAddress: 'pwed@users.noreply.github.com',
 
-  cdkVersion: '2.10.0',
+  cdkVersion: '2.5.0',
   defaultReleaseBranch: 'main',
   stability: 'experimental',
   keywords: ['cdk', 'aws'],
   license: 'MIT',
 
   // deps: [],
-  bundledDeps: ['glob', 'cdk-iam-floyd'],
-  peerDeps: ['cdk-ec2-key-pair', 'cdk-constants'], // * Runtime dependencies of this module. */
+  bundledDeps: ['glob', 'cdk-ec2-key-pair'],
+  peerDeps: [], // * Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: ['cdk-iam-floyd@0.300.0'] /* Build dependencies for this module. */,
   // packageName: undefined,  /* The "name" in package.json. */
-  jsiiReleaseVersion: '0.21.1',
+
   prettier: true,
   prettierOptions: {
     settings: {
@@ -27,6 +27,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
       singleQuote: true,
       tabWidth: 2,
     },
+  },
+  eslintOptions: {
+    prettier: true,
+    dirs: ['src'],
   },
 
   // Publishing

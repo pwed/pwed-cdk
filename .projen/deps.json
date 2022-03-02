@@ -21,15 +21,7 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "2.10.0",
-      "type": "build"
-    },
-    {
-      "name": "cdk-constants",
-      "type": "build"
-    },
-    {
-      "name": "cdk-ec2-key-pair",
+      "version": "2.5.0",
       "type": "build"
     },
     {
@@ -124,7 +116,7 @@
       "type": "build"
     },
     {
-      "name": "cdk-iam-floyd",
+      "name": "cdk-ec2-key-pair",
       "type": "bundled"
     },
     {
@@ -133,15 +125,7 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.10.0",
-      "type": "peer"
-    },
-    {
-      "name": "cdk-constants",
-      "type": "peer"
-    },
-    {
-      "name": "cdk-ec2-key-pair",
+      "version": "^2.5.0",
       "type": "peer"
     },
     {
