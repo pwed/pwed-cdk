@@ -95,11 +95,6 @@ jobs:
           NPM_DIST_TAG: latest
           NPM_REGISTRY: registry.npmjs.org
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> ac5735af76a5e62b0fd1fe6f0b31d4e6a8bee416
   release_pypi:
     name: Publish to PyPI
     needs: release
@@ -128,3 +123,7 @@ jobs:
       - name: Collect python Artifact
         run: mv .repo/dist dist
       - name: Release
+        run: npx -p publib@0.21.1 publib-pypi
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
