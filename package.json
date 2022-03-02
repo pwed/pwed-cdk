@@ -47,9 +47,11 @@
     "cdk-iam-floyd": "0.300.0",
     "constructs": "10.0.5",
     "eslint": "^8",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-import-resolver-node": "^0.3.6",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
     "jest": "^26.4.2",
     "jest-junit": "^13",
     "jsii": "^1.54.0",
@@ -57,9 +59,11 @@
     "jsii-docgen": "^6.1.18",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
+    "prettier": "^2.5.1",
     "projen": "^0.52.50",
     "standard-version": "^9",
     "ts-jest": "^26.2.0",
+    "ts-node": "^9",
     "typescript": "~3.9.7"
   },
   "peerDependencies": {
@@ -127,7 +131,16 @@
   "stability": "experimental",
   "jsii": {
     "outdir": "dist",
+<<<<<<< Updated upstream
     "targets": {},
+=======
+    "targets": {
+      "python": {
+        "distName": "pwed-cdk",
+        "module": "pwed_cdk"
+      }
+    },
+>>>>>>> Stashed changes
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"

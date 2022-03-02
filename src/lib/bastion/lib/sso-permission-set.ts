@@ -42,7 +42,7 @@ export class BastionPermissionSet extends Construct {
         sessionDuration: props.sessionDuration ? props.sessionDuration : 'PT8H',
         relayStateType:
           'https://console.aws.amazon.com/systems-manager/managed-instances/rdp-connect',
-      },
+      }
     );
   }
 
@@ -59,7 +59,7 @@ export class BastionPermissionSet extends Construct {
         instanceArn: this.ssoInstanceArn,
         targetType: 'AWS_ACCOUNT',
         targetId: accountId,
-      },
+      }
     );
   }
 }
