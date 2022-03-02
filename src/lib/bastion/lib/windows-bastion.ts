@@ -1,4 +1,4 @@
-import { Aws, aws_ec2, aws_iam, Resource, Tag, Tags } from 'aws-cdk-lib';
+import { aws_ec2, aws_iam, Resource, Stack, Tag, Tags } from 'aws-cdk-lib';
 import { IInstance } from 'aws-cdk-lib/aws-ec2';
 import { KeyPair } from 'cdk-ec2-key-pair';
 import { Construct } from 'constructs';
@@ -32,7 +32,7 @@ export class WindowsBastion extends Resource implements IInstance {
 
     const key: undefined | KeyPair = props?.createKeyPair
       ? new KeyPair(this, 'KeyPair', {
-          name: `${Aws.STACK_NAME}-${id}-windows-bastion-key`,
+          name: `${Stack.of(this).stackName}-${id}-windows-bastion-key`,
           storePublicKey: false,
         })
       : undefined;
