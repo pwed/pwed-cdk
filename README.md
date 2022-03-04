@@ -1,8 +1,13 @@
 # pwed-cdk
 
-[![build](https://github.com/pwed/pwed-cdk/actions/workflows/build.yaml/badge.svg)](https://github.com/pwed/pwed-cdk/actions/workflows/build.yaml)
+[![release](https://github.com/pwed/pwed-cdk/actions/workflows/release.yml/badge.svg)](https://github.com/pwed/pwed-cdk/actions/workflows/release.yml)
+![npm](https://img.shields.io/npm/v/pwed-cdk?color=%2368A063)
+![PyPI](https://img.shields.io/pypi/v/pwed-cdk?color=%23306998)
 
-A library of AWS CDK constructs that I have created
+
+A library of AWS CDK constructs that I have made for fun.
+
+[Docs](/API.md)
 
 ## Disclaimer
 
@@ -12,7 +17,11 @@ A much higher level of stability will be targeted after 1.0.0 release
 ## Install
 
 ```sh
+## Node
 npm i pwed-cdk
+
+## Python
+pip install pwed-cdk
 ```
 
 ## Constructs
@@ -30,8 +39,3 @@ npm i pwed-cdk
 
 1. Non SSO based access for bastion
 2. Hugo extension for static-site to auto build and deploy your static site
-3. Auto push to NPM
-   - github action for running jest
-4. JSII for python
-   - pip publish
-5. readme badges
