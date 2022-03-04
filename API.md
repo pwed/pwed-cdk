@@ -574,6 +574,7 @@ Check whether the given construct is a Resource.
 | <code><a href="#pwed-cdk.pwed_bastion.WindowsBastion.property.instancePrivateIp">instancePrivateIp</a></code> | <code>string</code> | Private IP for this instance. |
 | <code><a href="#pwed-cdk.pwed_bastion.WindowsBastion.property.instancePublicDnsName">instancePublicDnsName</a></code> | <code>string</code> | Publicly-routable DNS name for this instance. |
 | <code><a href="#pwed-cdk.pwed_bastion.WindowsBastion.property.instancePublicIp">instancePublicIp</a></code> | <code>string</code> | Publicly-routable IP  address for this instance. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastion.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | *No description.* |
 | <code><a href="#pwed-cdk.pwed_bastion.WindowsBastion.property.securityGroup">securityGroup</a></code> | <code>aws-cdk-lib.aws_ec2.ISecurityGroup</code> | *No description.* |
 
 ---
@@ -716,6 +717,16 @@ Publicly-routable IP  address for this instance.
 
 ---
 
+##### `role`<sup>Required</sup> <a name="role" id="pwed-cdk.pwed_bastion.WindowsBastion.property.role"></a>
+
+```typescript
+public readonly role: IRole;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
 ##### `securityGroup`<sup>Required</sup> <a name="securityGroup" id="pwed-cdk.pwed_bastion.WindowsBastion.property.securityGroup"></a>
 
 ```typescript
@@ -743,7 +754,7 @@ const bastionAccessPolicyProps: pwed_bastion.BastionAccessPolicyProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#pwed-cdk.pwed_bastion.BastionAccessPolicyProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | *No description.* |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionAccessPolicyProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | Tag used by all bastion resources for managing access to resources. |
 
 ---
 
@@ -754,6 +765,9 @@ public readonly securityTag: Tag;
 ```
 
 - *Type:* aws-cdk-lib.Tag
+- *Default:* {Key: "security:bastion", value: "true"}
+
+Tag used by all bastion resources for managing access to resources.
 
 ---
 
@@ -771,40 +785,101 @@ const bastionPermissionSetProps: pwed_bastion.BastionPermissionSetProps = { ... 
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.permissionSetName">permissionSetName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.ssoInstanceArn">ssoInstanceArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | *No description.* |
-| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.sessionDuration">sessionDuration</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.instanceArn">instanceArn</a></code> | <code>string</code> | The ARN of the SSO instance under which the operation will be executed. |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.name">name</a></code> | <code>string</code> | The name of the permission set. |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.description">description</a></code> | <code>string</code> | The description of the `PermissionSet` . |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.inlinePolicy">inlinePolicy</a></code> | <code>any</code> | The IAM inline policy that is attached to the permission set. |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.managedPolicies">managedPolicies</a></code> | <code>string[]</code> | A structure that stores the details of the IAM managed policy. |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.relayStateType">relayStateType</a></code> | <code>string</code> | Used to redirect users within the application during the federation authentication process. |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.sessionDuration">sessionDuration</a></code> | <code>string</code> | The length of time that the application user sessions are valid for in the ISO-8601 standard. |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | The tags to attach to the new `PermissionSet` . |
+| <code><a href="#pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | Tag used by all bastion resources for managing access to resources. |
 
 ---
 
-##### `permissionSetName`<sup>Required</sup> <a name="permissionSetName" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.permissionSetName"></a>
+##### `instanceArn`<sup>Required</sup> <a name="instanceArn" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.instanceArn"></a>
 
 ```typescript
-public readonly permissionSetName: string;
+public readonly instanceArn: string;
 ```
 
 - *Type:* string
 
+The ARN of the SSO instance under which the operation will be executed.
+
+For more information about ARNs, see [Amazon Resource Names (ARNs) and AWS Service Namespaces](https://docs.aws.amazon.com//general/latest/gr/aws-arns-and-namespaces.html) in the *AWS General Reference* .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-instancearn](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-instancearn)
+
 ---
 
-##### `ssoInstanceArn`<sup>Required</sup> <a name="ssoInstanceArn" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.ssoInstanceArn"></a>
+##### `name`<sup>Required</sup> <a name="name" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.name"></a>
 
 ```typescript
-public readonly ssoInstanceArn: string;
+public readonly name: string;
 ```
 
 - *Type:* string
 
+The name of the permission set.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-name](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-name)
+
 ---
 
-##### `securityTag`<sup>Optional</sup> <a name="securityTag" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.securityTag"></a>
+##### `description`<sup>Optional</sup> <a name="description" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.description"></a>
 
 ```typescript
-public readonly securityTag: Tag;
+public readonly description: string;
 ```
 
-- *Type:* aws-cdk-lib.Tag
+- *Type:* string
+
+The description of the `PermissionSet` .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-description](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-description)
+
+---
+
+##### `inlinePolicy`<sup>Optional</sup> <a name="inlinePolicy" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.inlinePolicy"></a>
+
+```typescript
+public readonly inlinePolicy: any;
+```
+
+- *Type:* any
+
+The IAM inline policy that is attached to the permission set.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-inlinepolicy](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-inlinepolicy)
+
+---
+
+##### `managedPolicies`<sup>Optional</sup> <a name="managedPolicies" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.managedPolicies"></a>
+
+```typescript
+public readonly managedPolicies: string[];
+```
+
+- *Type:* string[]
+
+A structure that stores the details of the IAM managed policy.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-managedpolicies](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-managedpolicies)
+
+---
+
+##### `relayStateType`<sup>Optional</sup> <a name="relayStateType" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.relayStateType"></a>
+
+```typescript
+public readonly relayStateType: string;
+```
+
+- *Type:* string
+
+Used to redirect users within the application during the federation authentication process.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-relaystatetype](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-relaystatetype)
 
 ---
 
@@ -815,6 +890,37 @@ public readonly sessionDuration: string;
 ```
 
 - *Type:* string
+
+The length of time that the application user sessions are valid for in the ISO-8601 standard.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-sessionduration](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-sessionduration)
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.tags"></a>
+
+```typescript
+public readonly tags: CfnTag[];
+```
+
+- *Type:* aws-cdk-lib.CfnTag[]
+
+The tags to attach to the new `PermissionSet` .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-tags](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-tags)
+
+---
+
+##### `securityTag`<sup>Optional</sup> <a name="securityTag" id="pwed-cdk.pwed_bastion.BastionPermissionSetProps.property.securityTag"></a>
+
+```typescript
+public readonly securityTag: Tag;
+```
+
+- *Type:* aws-cdk-lib.Tag
+- *Default:* {Key: "security:bastion", value: "true"}
+
+Tag used by all bastion resources for managing access to resources.
 
 ---
 
@@ -832,7 +938,7 @@ const scheduleShutdownProps: pwed_bastion.ScheduleShutdownProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#pwed-cdk.pwed_bastion.ScheduleShutdownProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | *No description.* |
+| <code><a href="#pwed-cdk.pwed_bastion.ScheduleShutdownProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | Tag used by all bastion resources for managing access to resources. |
 | <code><a href="#pwed-cdk.pwed_bastion.ScheduleShutdownProps.property.shutdownSchedule">shutdownSchedule</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#pwed-cdk.pwed_bastion.ScheduleShutdownProps.property.timezone">timezone</a></code> | <code>string</code> | *No description.* |
 
@@ -845,6 +951,9 @@ public readonly securityTag: Tag;
 ```
 
 - *Type:* aws-cdk-lib.Tag
+- *Default:* {Key: "security:bastion", value: "true"}
+
+Tag used by all bastion resources for managing access to resources.
 
 ---
 
@@ -865,6 +974,37 @@ public readonly timezone: string;
 ```
 
 - *Type:* string
+
+---
+
+### SecurityTagable <a name="SecurityTagable" id="pwed-cdk.pwed_bastion.SecurityTagable"></a>
+
+#### Initializer <a name="Initializer" id="pwed-cdk.pwed_bastion.SecurityTagable.Initializer"></a>
+
+```typescript
+import { pwed_bastion } from 'pwed-cdk'
+
+const securityTagable: pwed_bastion.SecurityTagable = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#pwed-cdk.pwed_bastion.SecurityTagable.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | Tag used by all bastion resources for managing access to resources. |
+
+---
+
+##### `securityTag`<sup>Optional</sup> <a name="securityTag" id="pwed-cdk.pwed_bastion.SecurityTagable.property.securityTag"></a>
+
+```typescript
+public readonly securityTag: Tag;
+```
+
+- *Type:* aws-cdk-lib.Tag
+- *Default:* {Key: "security:bastion", value: "true"}
+
+Tag used by all bastion resources for managing access to resources.
 
 ---
 
@@ -932,11 +1072,32 @@ const windowsBastionProps: pwed_bastion.WindowsBastionProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
-| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | *No description.* |
-| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.createKeyPair">createKeyPair</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | *No description.* |
-| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.windowsPackages">windowsPackages</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.securityTag">securityTag</a></code> | <code>aws-cdk-lib.Tag</code> | Tag used by all bastion resources for managing access to resources. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC to launch the instance in. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | Where to place the instance within the VPC. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.blockDevices">blockDevices</a></code> | <code>aws-cdk-lib.aws_ec2.BlockDevice[]</code> | Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.createKeyPair">createKeyPair</a></code> | <code>boolean</code> | If a keypair should be created and saved into Secrets Manager. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.instanceName">instanceName</a></code> | <code>string</code> | The name of the instance. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.instanceType">instanceType</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType</code> | Type of instance to launch. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.machineImage">machineImage</a></code> | <code>aws-cdk-lib.aws_ec2.IMachineImage</code> | AMI to launch. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.privateIpAddress">privateIpAddress</a></code> | <code>string</code> | Defines a private IP address to associate with an instance. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | An IAM role to associate with the instance profile assigned to this Auto Scaling Group. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.securityGroup">securityGroup</a></code> | <code>aws-cdk-lib.aws_ec2.ISecurityGroup</code> | Security Group to assign to this instance. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.userData">userData</a></code> | <code>aws-cdk-lib.aws_ec2.UserData</code> | Specific UserData to use. |
+| <code><a href="#pwed-cdk.pwed_bastion.WindowsBastionProps.property.windowsPackages">windowsPackages</a></code> | <code>string[]</code> | List of packages to be installed as part of the userdata using winget. |
+
+---
+
+##### `securityTag`<sup>Optional</sup> <a name="securityTag" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.securityTag"></a>
+
+```typescript
+public readonly securityTag: Tag;
+```
+
+- *Type:* aws-cdk-lib.Tag
+- *Default:* {Key: "security:bastion", value: "true"}
+
+Tag used by all bastion resources for managing access to resources.
 
 ---
 
@@ -948,6 +1109,8 @@ public readonly vpc: IVpc;
 
 - *Type:* aws-cdk-lib.aws_ec2.IVpc
 
+VPC to launch the instance in.
+
 ---
 
 ##### `vpcSubnets`<sup>Required</sup> <a name="vpcSubnets" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.vpcSubnets"></a>
@@ -957,6 +1120,26 @@ public readonly vpcSubnets: SubnetSelection;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
+- *Default:* Private subnets.
+
+Where to place the instance within the VPC.
+
+---
+
+##### `blockDevices`<sup>Optional</sup> <a name="blockDevices" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.blockDevices"></a>
+
+```typescript
+public readonly blockDevices: BlockDevice[];
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.BlockDevice[]
+- *Default:* Uses the block device mapping of the AMI
+
+Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.
+
+Each instance that is launched has an associated root device volume, either an Amazon EBS volume or an instance store volume. You can use block device mappings to specify additional EBS volumes or instance store volumes to attach to an instance when it is launched.
+
+> [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 
 ---
 
@@ -967,16 +1150,108 @@ public readonly createKeyPair: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* false
+
+If a keypair should be created and saved into Secrets Manager.
+
+This can be used to get Administrator user access
 
 ---
 
-##### `securityTag`<sup>Optional</sup> <a name="securityTag" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.securityTag"></a>
+##### `instanceName`<sup>Optional</sup> <a name="instanceName" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.instanceName"></a>
 
 ```typescript
-public readonly securityTag: Tag;
+public readonly instanceName: string;
 ```
 
-- *Type:* aws-cdk-lib.Tag
+- *Type:* string
+- *Default:* CDK generated name
+
+The name of the instance.
+
+---
+
+##### `instanceType`<sup>Optional</sup> <a name="instanceType" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.instanceType"></a>
+
+```typescript
+public readonly instanceType: InstanceType;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.InstanceType
+- *Default:* t3a.large
+
+Type of instance to launch.
+
+---
+
+##### `machineImage`<sup>Optional</sup> <a name="machineImage" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.machineImage"></a>
+
+```typescript
+public readonly machineImage: IMachineImage;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.IMachineImage
+- *Default:* latest windows server 2022 full base
+
+AMI to launch.
+
+---
+
+##### `privateIpAddress`<sup>Optional</sup> <a name="privateIpAddress" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.privateIpAddress"></a>
+
+```typescript
+public readonly privateIpAddress: string;
+```
+
+- *Type:* string
+- *Default:* no association
+
+Defines a private IP address to associate with an instance.
+
+Private IP should be available within the VPC that the instance is build within.
+
+---
+
+##### `role`<sup>Optional</sup> <a name="role" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.role"></a>
+
+```typescript
+public readonly role: IRole;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+- *Default:* A role will automatically be created, it can be accessed via the `role` property
+
+An IAM role to associate with the instance profile assigned to this Auto Scaling Group.
+
+The role must be assumable by the service principal `ec2.amazonaws.com`:
+
+---
+
+##### `securityGroup`<sup>Optional</sup> <a name="securityGroup" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.securityGroup"></a>
+
+```typescript
+public readonly securityGroup: ISecurityGroup;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.ISecurityGroup
+- *Default:* create new security group
+
+Security Group to assign to this instance.
+
+---
+
+##### `userData`<sup>Optional</sup> <a name="userData" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.userData"></a>
+
+```typescript
+public readonly userData: UserData;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.UserData
+- *Default:* A UserData object appropriate for the MachineImage's Operating System is created.
+
+Specific UserData to use.
+
+The UserData may still be mutated after creation.
 
 ---
 
@@ -987,6 +1262,9 @@ public readonly windowsPackages: string[];
 ```
 
 - *Type:* string[]
+- *Default:* no association
+
+List of packages to be installed as part of the userdata using winget.
 
 ---
 

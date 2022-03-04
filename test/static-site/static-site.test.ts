@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import * as StaticSite from '../src/lib/static-site/index';
+import * as StaticSite from '../../src/lib/static-site/index';
 
 const app = new cdk.App();
 const stack = new cdk.Stack(app, 'TestStack');

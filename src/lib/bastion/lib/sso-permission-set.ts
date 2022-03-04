@@ -1,14 +1,12 @@
 import { aws_iam, aws_sso, Tag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { BastionAccessPolicyProps } from '..';
 import { BastionAccessPolicy } from './access-policy';
-import { Constants } from './constants';
+import { DefaultSecurityTag } from './security-tag';
 
-export interface BastionPermissionSetProps {
-  readonly ssoInstanceArn: string;
-  readonly permissionSetName: string;
-  readonly sessionDuration?: string;
-  readonly securityTag?: Tag;
-}
+export interface BastionPermissionSetProps
+  extends aws_sso.CfnPermissionSetProps,
+    BastionAccessPolicyProps {}
 
 export class BastionPermissionSet extends Construct {
   private policy: aws_iam.PolicyDocument;
@@ -20,9 +18,9 @@ export class BastionPermissionSet extends Construct {
 
     this.securityTag = props.securityTag
       ? props.securityTag
-      : Constants.securityTag;
+      : DefaultSecurityTag;
 
-    this.ssoInstanceArn = props.ssoInstanceArn;
+    this.ssoInstanceArn = props.instanceArn;
 
     const accessPolicy = new BastionAccessPolicy(this, 'BastionAccessPolicy', {
       securityTag: this.securityTag,
@@ -34,12 +32,10 @@ export class BastionPermissionSet extends Construct {
       this,
       'BastionAccessPermissionSet',
       {
-        instanceArn: props.ssoInstanceArn,
+        instanceArn: props.instanceArn,
         inlinePolicy: this.policy,
-        name: props.permissionSetName
-          ? props.permissionSetName
-          : 'BastionAccess',
-        sessionDuration: props.sessionDuration ? props.sessionDuration : 'PT8H',
+        name: props.name,
+        sessionDuration: props.sessionDuration ? props.sessionDuration : 'PT4H',
         relayStateType:
           'https://console.aws.amazon.com/systems-manager/managed-instances/rdp-connect',
       }

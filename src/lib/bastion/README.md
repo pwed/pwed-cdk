@@ -4,7 +4,7 @@ A set of constructs to create and access bastion hosts using SSO or IAM. By usin
 
 ## Todo
 
-- Allow full custom userdata
 - Allow choco installs
 - fix aws cli not installing with winget
-- tests
+- Allow picking and choosing of services in the access policy
+

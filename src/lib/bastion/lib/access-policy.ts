@@ -1,10 +1,8 @@
-import { aws_iam, Tag } from 'aws-cdk-lib';
+import { aws_iam } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Constants } from './constants';
+import { DefaultSecurityTag, SecurityTagable } from './security-tag';
 
-export interface BastionAccessPolicyProps {
-  readonly securityTag?: Tag;
-}
+export interface BastionAccessPolicyProps extends SecurityTagable {}
 
 export class BastionAccessPolicy extends Construct {
   policy: aws_iam.PolicyDocument;
@@ -13,7 +11,7 @@ export class BastionAccessPolicy extends Construct {
 
     const securityTag = props?.securityTag
       ? props.securityTag
-      : Constants.securityTag;
+      : DefaultSecurityTag;
 
     this.policy = new aws_iam.PolicyDocument({
       statements: [

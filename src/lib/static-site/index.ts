@@ -104,8 +104,6 @@ export class StaticSite extends Construct {
       ...compareRemoteToLocal(props.domain, hashFile, props.path)
     );
 
-    console.log('Invalidations:\n', invalidations);
-
     new aws_s3_deployment.BucketDeployment(this, 'StaticDeployment', {
       sources: [aws_s3_deployment.Source.asset(props.path)],
       destinationBucket: bucket,
@@ -157,10 +155,9 @@ function compareRemoteToLocal(
   );
   try {
     oldHashesJSON = child_process
-      .execSync(`curl https://${domain}/${hashFile}`)
+      .execSync(`curl -s https://${domain}/${hashFile}`)
       .toString();
-  } catch (e) {
-    console.log('error getting file from web', e);
+  } catch {
     return ['/*'];
   }
   let oldHashes: Map<string, string>;

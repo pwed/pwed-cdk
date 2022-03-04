@@ -1,9 +1,8 @@
-import { aws_iam, aws_ssm, Stack, Tag } from 'aws-cdk-lib';
+import { aws_iam, aws_ssm, Stack } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Constants } from './constants';
+import { DefaultSecurityTag, SecurityTagable } from './security-tag';
 
-export interface ScheduleShutdownProps {
-  readonly securityTag?: Tag;
+export interface ScheduleShutdownProps extends SecurityTagable {
   readonly timezone?: string;
   readonly shutdownSchedule?: string;
 }
@@ -14,7 +13,7 @@ export class ScheduleShutdown extends Construct {
 
     const securityTag = props?.securityTag
       ? props.securityTag
-      : Constants.securityTag;
+      : DefaultSecurityTag;
 
     const maintanenceWindow = new aws_ssm.CfnMaintenanceWindow(
       this,

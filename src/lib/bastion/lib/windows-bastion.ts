@@ -1,18 +1,115 @@
-import { aws_ec2, aws_iam, Resource, Stack, Tag, Tags } from 'aws-cdk-lib';
-import { IInstance } from 'aws-cdk-lib/aws-ec2';
+import { aws_ec2, aws_iam, Resource, Stack, Tags } from 'aws-cdk-lib';
 import { KeyPair } from 'cdk-ec2-key-pair';
 import { Construct } from 'constructs';
-import { Constants } from './constants';
+import { DefaultSecurityTag, SecurityTagable } from './security-tag';
 
-export interface WindowsBastionProps {
-  readonly securityTag?: Tag;
-  readonly createKeyPair?: boolean;
-  readonly vpc: aws_ec2.IVpc;
-  readonly windowsPackages?: string[];
+export interface WindowsBastionProps extends SecurityTagable {
+  /**
+   * Where to place the instance within the VPC.
+   *
+   * @default - Private subnets.
+   * @stability stable
+   */
   readonly vpcSubnets: aws_ec2.SubnetSelection;
+  /**
+   * VPC to launch the instance in.
+   *
+   * @stability stable
+   */
+  readonly vpc: aws_ec2.IVpc;
+  /**
+   * Security Group to assign to this instance.
+   *
+   * @default - create new security group
+   * @stability stable
+   */
+  readonly securityGroup?: aws_ec2.ISecurityGroup;
+  /**
+   * Type of instance to launch.
+   *
+   * @default - t3a.large
+   * @stability stable
+   */
+  readonly instanceType?: aws_ec2.InstanceType;
+  /**
+   * AMI to launch.
+   *
+   * @default - latest windows server 2022 full base
+   * @stability stable
+   */
+  readonly machineImage?: aws_ec2.IMachineImage;
+  /**
+   * Specific UserData to use.
+   *
+   * The UserData may still be mutated after creation.
+   *
+   * @default - A UserData object appropriate for the MachineImage's
+   * Operating System is created.
+   * @stability stable
+   */
+  readonly userData?: aws_ec2.UserData;
+  /**
+   * An IAM role to associate with the instance profile assigned to this Auto Scaling Group.
+   *
+   * The role must be assumable by the service principal `ec2.amazonaws.com`:
+   *
+   * @default - A role will automatically be created, it can be accessed via the `role` property
+   * @stability stable
+   * @example
+   *
+   * const role = new iam.Role(this, 'MyRole', {
+   *   assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com')
+   * });
+   */
+  readonly role?: aws_iam.IRole;
+  /**
+   * The name of the instance.
+   *
+   * @default - CDK generated name
+   * @stability stable
+   */
+  readonly instanceName?: string;
+  /**
+   * Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.
+   *
+   * Each instance that is launched has an associated root device volume,
+   * either an Amazon EBS volume or an instance store volume.
+   * You can use block device mappings to specify additional EBS volumes or
+   * instance store volumes to attach to an instance when it is launched.
+   *
+   * @default - Uses the block device mapping of the AMI
+   * @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
+   * @stability stable
+   */
+  readonly blockDevices?: aws_ec2.BlockDevice[];
+  /**
+   * Defines a private IP address to associate with an instance.
+   *
+   * Private IP should be available within the VPC that the instance is build within.
+   *
+   * @default - no association
+   * @stability stable
+   */
+  readonly privateIpAddress?: string;
+  /**
+   * If a keypair should be created and saved into Secrets Manager.
+   *
+   * This can be used to get Administrator user access
+   *
+   * @default - false
+   * @stability stable
+   */
+  readonly createKeyPair?: boolean;
+  /**
+   * List of packages to be installed as part of the userdata using winget.
+   *
+   * @default - no association
+   * @stability experimental
+   */
+  readonly windowsPackages?: string[];
 }
 
-export class WindowsBastion extends Resource implements IInstance {
+export class WindowsBastion extends Resource implements aws_ec2.IInstance {
   readonly securityGroup: aws_ec2.ISecurityGroup;
   readonly instanceId: string;
   readonly instanceAvailabilityZone: string;
@@ -22,13 +119,14 @@ export class WindowsBastion extends Resource implements IInstance {
   readonly instancePublicIp: string;
   readonly connections: aws_ec2.Connections;
   readonly grantPrincipal: aws_iam.IPrincipal;
+  readonly role: aws_iam.IRole;
 
   constructor(scope: Construct, id: string, props: WindowsBastionProps) {
     super(scope, id);
 
     const securityTag = props?.securityTag
       ? props.securityTag
-      : Constants.securityTag;
+      : DefaultSecurityTag;
 
     const key: undefined | KeyPair = props?.createKeyPair
       ? new KeyPair(this, 'KeyPair', {
@@ -47,53 +145,55 @@ export class WindowsBastion extends Resource implements IInstance {
       }
     );
 
-    const bastionInstance = new aws_ec2.Instance(this, 'BastionInstance', {
-      instanceType: aws_ec2.InstanceType.of(
-        aws_ec2.InstanceClass.C5A,
-        aws_ec2.InstanceSize.XLARGE
-      ),
-      machineImage: aws_ec2.MachineImage.latestWindows(
-        aws_ec2.WindowsVersion.WINDOWS_SERVER_2022_ENGLISH_FULL_BASE
-      ),
-      vpc: props.vpc,
-      vpcSubnets: props.vpcSubnets,
-      blockDevices: [
-        {
-          deviceName: '/dev/sda1',
-          volume: aws_ec2.BlockDeviceVolume.ebs(40, {
-            volumeType: aws_ec2.EbsDeviceVolumeType.GP3,
-            encrypted: true,
-          }),
-        },
-      ],
+    if (
+      props.machineImage &&
+      props.machineImage.getImage(this).osType !=
+        aws_ec2.OperatingSystemType.WINDOWS
+    )
+      throw 'machineImage is not Windows based';
+
+    const machineImage = props.machineImage
+      ? props.machineImage
+      : aws_ec2.MachineImage.latestWindows(
+          aws_ec2.WindowsVersion.WINDOWS_SERVER_2022_ENGLISH_FULL_BASE
+        );
+    const instanceType = props.instanceType
+      ? props.instanceType
+      : aws_ec2.InstanceType.of(
+          aws_ec2.InstanceClass.T3A,
+          aws_ec2.InstanceSize.LARGE
+        );
+
+    const instanceProps: aws_ec2.InstanceProps = {
+      ...props,
       propagateTagsToVolumeOnCreation: true,
-      keyName: key?.keyPairName,
-      securityGroup: this.securityGroup,
       userDataCausesReplacement: true,
-    });
+      keyName: key?.keyPairName,
+      machineImage,
+      instanceType,
+    };
 
-    const windowsPackages = props.windowsPackages ? props.windowsPackages : [];
+    const bastionInstance = new aws_ec2.Instance(
+      this,
+      'BastionInstance',
+      instanceProps
+    );
 
-    const userData = [
-      'for($i=1; $i -le 10; $i++) {',
-      '  reg query HKLMSOFTWAREMicrosoftWindowsCurrentVersionInstallerInProgress',
-      '  if ($LASTEXITCODE -ne 0 ) {',
-      '    Write-Output "No installer is running, continuing"',
-      '    break',
-      '  }',
-      '  Write-Output "Another installer is running, waiting ($i / 10)"',
-      '  Start-Sleep -Seconds 15',
-      '}',
-      // Unfortunately Windows Server 2022 doesn't support WinGet yet ...
-      // https://github.com/microsoft/winget-cli/issues/1929
-      'iwr -UseBasicParsing https://github.com/jedieaston/winget-build/raw/main/Install.ps1 | iex',
-      ...windowsPackages.map((p) => {
-        return `wingetdev install --silent --accept-source-agreements --accept-package-agreements ${p}`;
-      }),
-      'wingetdev upgrade --all --silent --accept-source-agreements --accept-package-agreements',
-    ].join('\n');
+    if (props.windowsPackages) {
+      const packageUserData = [
+        'Write-Output "Waiting before installing packages incase another installer is already running"',
+        'Start-Sleep -Seconds 150',
+        // Unfortunately Windows Server 2022 doesn't support WinGet yet ...
+        // https://github.com/microsoft/winget-cli/issues/1929
+        'iwr -UseBasicParsing https://github.com/jedieaston/winget-build/raw/main/Install.ps1 | iex',
+        ...props.windowsPackages.map((p) => {
+          return `wingetdev install --silent --accept-source-agreements --accept-package-agreements ${p}`;
+        }),
+        'wingetdev upgrade --all --silent --accept-source-agreements --accept-package-agreements',
+      ].join('\n');
 
-    bastionInstance.addUserData(userData);
+      bastionInstance.addUserData(packageUserData);
+    }
 
     Tags.of(bastionInstance.instance).add(securityTag.key, securityTag.value);
 
@@ -110,5 +210,6 @@ export class WindowsBastion extends Resource implements IInstance {
     this.instancePublicDnsName = bastionInstance.instancePublicDnsName;
     this.instancePublicIp = bastionInstance.instancePublicIp;
     this.connections = bastionInstance.connections;
+    this.role = bastionInstance.role;
   }
 }
