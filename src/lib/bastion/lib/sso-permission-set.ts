@@ -1,4 +1,4 @@
-import { aws_iam, aws_sso, Tag } from 'aws-cdk-lib';
+import { aws_iam, aws_sso, Resource, Tag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { BastionAccessPolicyProps } from '..';
 import { BastionAccessPolicy } from './access-policy';
@@ -8,7 +8,7 @@ export interface BastionPermissionSetProps
   extends aws_sso.CfnPermissionSetProps,
     BastionAccessPolicyProps {}
 
-export class BastionPermissionSet extends Construct {
+export class BastionPermissionSet extends Resource {
   private policy: aws_iam.PolicyDocument;
   private permissionSet: aws_sso.CfnPermissionSet;
   private ssoInstanceArn: string;
