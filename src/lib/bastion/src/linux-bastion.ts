@@ -51,32 +51,30 @@ export class LinuxBastion extends Resource implements aws_ec2.IInstance {
       {
         vpc: props.vpc,
         allowAllOutbound: true,
-      }
+      },
     );
 
     if (
       props.machineImage &&
       props.machineImage.getImage(this).osType !=
         aws_ec2.OperatingSystemType.LINUX
-    )
-      throw 'machineImage is not Linux based';
+    ) {throw 'machineImage is not Linux based';}
     const instanceType = props.instanceType
       ? props.instanceType
       : aws_ec2.InstanceType.of(
-          aws_ec2.InstanceClass.T3A,
-          aws_ec2.InstanceSize.LARGE
-        );
+        aws_ec2.InstanceClass.T3A,
+        aws_ec2.InstanceSize.LARGE,
+      );
     let amazonLinuxCpuType: aws_ec2.AmazonLinuxCpuType =
       aws_ec2.AmazonLinuxCpuType.ARM_64;
-    if (instanceType.architecture == 'x86_64')
-      amazonLinuxCpuType = aws_ec2.AmazonLinuxCpuType.X86_64;
+    if (instanceType.architecture == 'x86_64') {amazonLinuxCpuType = aws_ec2.AmazonLinuxCpuType.X86_64;}
 
     const machineImage = props.machineImage
       ? props.machineImage
       : aws_ec2.MachineImage.latestAmazonLinux({
-          generation: aws_ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
-          cpuType: amazonLinuxCpuType,
-        });
+        generation: aws_ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+        cpuType: amazonLinuxCpuType,
+      });
 
     const instanceProps: aws_ec2.InstanceProps = {
       ...props,
@@ -89,7 +87,7 @@ export class LinuxBastion extends Resource implements aws_ec2.IInstance {
     const bastionInstance = new aws_ec2.Instance(
       this,
       'BastionInstance',
-      instanceProps
+      instanceProps,
     );
 
     const packageManager = props.packageManager
@@ -98,20 +96,21 @@ export class LinuxBastion extends Resource implements aws_ec2.IInstance {
 
     bastionInstance.addUserData(
       `${packageManager} update -y`,
-      `${packageManager} upgrade -y`
+      `${packageManager} upgrade -y`,
     );
 
-    if (props.packages)
+    if (props.packages) {
       bastionInstance.addUserData(
-        `${packageManager} install -y ${props.packages.join(' ')}`
+        `${packageManager} install -y ${props.packages.join(' ')}`,
       );
+    }
 
     Tags.of(bastionInstance.instance).add(securityTag.key, securityTag.value);
 
     bastionInstance.role.addManagedPolicy(
       aws_iam.ManagedPolicy.fromAwsManagedPolicyName(
-        'AmazonSSMManagedInstanceCore'
-      )
+        'AmazonSSMManagedInstanceCore',
+      ),
     );
     this.instanceId = bastionInstance.instanceId;
     this.instanceAvailabilityZone = bastionInstance.instanceAvailabilityZone;

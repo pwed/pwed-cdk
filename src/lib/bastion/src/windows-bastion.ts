@@ -44,9 +44,9 @@ export class WindowsBastion extends Resource implements aws_ec2.IInstance {
 
     const key: undefined | KeyPair = props?.createKeyPair
       ? new KeyPair(this, 'KeyPair', {
-          name: `${Stack.of(this).stackName}-${id}-windows-bastion-key`,
-          storePublicKey: false,
-        })
+        name: `${Stack.of(this).stackName}-${id}-windows-bastion-key`,
+        storePublicKey: false,
+      })
       : undefined;
     if (key) Tags.of(key).add(securityTag.key, securityTag.value);
 
@@ -56,27 +56,26 @@ export class WindowsBastion extends Resource implements aws_ec2.IInstance {
       {
         vpc: props.vpc,
         allowAllOutbound: true,
-      }
+      },
     );
 
     if (
       props.machineImage &&
       props.machineImage.getImage(this).osType !=
         aws_ec2.OperatingSystemType.WINDOWS
-    )
-      throw 'machineImage is not Windows based';
+    ) {throw 'machineImage is not Windows based';}
 
     const machineImage = props.machineImage
       ? props.machineImage
       : aws_ec2.MachineImage.latestWindows(
-          aws_ec2.WindowsVersion.WINDOWS_SERVER_2022_ENGLISH_FULL_BASE
-        );
+        aws_ec2.WindowsVersion.WINDOWS_SERVER_2022_ENGLISH_FULL_BASE,
+      );
     const instanceType = props.instanceType
       ? props.instanceType
       : aws_ec2.InstanceType.of(
-          aws_ec2.InstanceClass.T3A,
-          aws_ec2.InstanceSize.LARGE
-        );
+        aws_ec2.InstanceClass.T3A,
+        aws_ec2.InstanceSize.LARGE,
+      );
 
     const instanceProps: aws_ec2.InstanceProps = {
       ...props,
@@ -90,7 +89,7 @@ export class WindowsBastion extends Resource implements aws_ec2.IInstance {
     const bastionInstance = new aws_ec2.Instance(
       this,
       'BastionInstance',
-      instanceProps
+      instanceProps,
     );
 
     if (props.windowsPackages) {
@@ -113,8 +112,8 @@ export class WindowsBastion extends Resource implements aws_ec2.IInstance {
 
     bastionInstance.role.addManagedPolicy(
       aws_iam.ManagedPolicy.fromAwsManagedPolicyName(
-        'AmazonSSMManagedInstanceCore'
-      )
+        'AmazonSSMManagedInstanceCore',
+      ),
     );
     this.instanceId = bastionInstance.instanceId;
     this.instanceAvailabilityZone = bastionInstance.instanceAvailabilityZone;

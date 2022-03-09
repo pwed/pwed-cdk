@@ -48,7 +48,7 @@ export class BastionAccessPolicy extends Construct {
           resources: ['arn:aws:ec2:*:*:instance/*'],
           conditions: {
             StringEquals: JSON.parse(
-              `{"aws:ResourceTag/${securityTag.key}": "${securityTag.value}"}`
+              `{"aws:ResourceTag/${securityTag.key}": "${securityTag.value}"}`,
             ),
           },
         }),
@@ -61,7 +61,7 @@ export class BastionAccessPolicy extends Construct {
           resources: ['*'],
           conditions: {
             StringEquals: JSON.parse(
-              `{"aws:ResourceTag/${securityTag.key}": "${securityTag.value}"}`
+              `{"aws:ResourceTag/${securityTag.key}": "${securityTag.value}"}`,
             ),
           },
         }),

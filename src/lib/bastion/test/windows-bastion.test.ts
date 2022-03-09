@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { WindowsBastion } from '../../src/lib/bastion/index';
+import { WindowsBastion } from '../src/index';
 
 const app = new cdk.App();
 const stack = new cdk.Stack(app, 'TestStack');

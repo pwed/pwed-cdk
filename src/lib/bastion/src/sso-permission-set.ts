@@ -1,12 +1,11 @@
 import { aws_iam, aws_sso, Resource, Tag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { BastionAccessPolicyProps } from '..';
-import { BastionAccessPolicy } from './access-policy';
+import { BastionAccessPolicy, BastionAccessPolicyProps } from './access-policy';
 import { DefaultSecurityTag } from './security-tag';
 
 export interface BastionPermissionSetProps
   extends aws_sso.CfnPermissionSetProps,
-    BastionAccessPolicyProps {}
+  BastionAccessPolicyProps {}
 
 export class BastionPermissionSet extends Resource {
   private policy: aws_iam.PolicyDocument;
@@ -38,7 +37,7 @@ export class BastionPermissionSet extends Resource {
         sessionDuration: props.sessionDuration ? props.sessionDuration : 'PT4H',
         relayStateType:
           'https://console.aws.amazon.com/systems-manager/managed-instances/rdp-connect',
-      }
+      },
     );
   }
 
@@ -55,7 +54,7 @@ export class BastionPermissionSet extends Resource {
         instanceArn: this.ssoInstanceArn,
         targetType: 'AWS_ACCOUNT',
         targetId: accountId,
-      }
+      },
     );
   }
 }

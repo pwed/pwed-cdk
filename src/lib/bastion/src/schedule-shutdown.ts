@@ -29,7 +29,7 @@ export class ScheduleShutdown extends Construct {
         scheduleTimezone: props?.timezone
           ? props.timezone
           : 'Australia/Melbourne',
-      }
+      },
     );
 
     const maintanenceTarget = new aws_ssm.CfnMaintenanceWindowTarget(
@@ -44,7 +44,7 @@ export class ScheduleShutdown extends Construct {
           },
         ],
         windowId: maintanenceWindow.ref,
-      }
+      },
     );
 
     const taskRole = new aws_iam.Role(this, 'AutomationRole', {
@@ -57,7 +57,7 @@ export class ScheduleShutdown extends Construct {
               actions: ['ec2:StopInstances'],
               conditions: {
                 StringEquals: JSON.parse(
-                  `{"aws:ResourceTag/${securityTag.key}": "${securityTag.value}"}`
+                  `{"aws:ResourceTag/${securityTag.key}": "${securityTag.value}"}`,
                 ),
               },
             }),

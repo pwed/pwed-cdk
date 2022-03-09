@@ -1,4 +1,6 @@
 import { awscdk } from 'projen';
+import * as path from 'path';
+
 const project = new awscdk.AwsCdkConstructLibrary({
   name: 'pwed-cdk',
   description: 'A library of AWS CDK constructs that I have created',
@@ -42,4 +44,29 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   projenrcTs: true,
 });
+
+new awscdk.AwsCdkConstructLibrary({
+  parent: project,
+  repositoryUrl: 'https://github.com/pwed/pwed-cdk/src/lib/bastion/',
+  author: 'Fred Stoddart',
+  authorAddress: 'pwed@users.noreply.github.com',
+
+  cdkVersion: '2.5.0',
+  defaultReleaseBranch: 'main',
+  name: 'pwed-cdk-bastion',
+  repositoryDirectory: path.join(__dirname, 'src', 'lib', 'bastion'),
+  outdir: path.join('.', 'src', 'lib', 'bastion'),
+
+  deps: ['cdk-iam-floyd@0.300.0'],
+  bundledDeps: ['glob', 'cdk-ec2-key-pair', 'cdk-iam-floyd'],
+  peerDeps: [], // * Runtime dependencies of this module. */
+  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
+  devDeps: ['cdk-iam-floyd@0.300.0'] /* Build dependencies for this module. */,
+  // packageName: undefined,  /* The "name" in package.json. */
+
+  docgen: true,
+  docgenFilePath: path.join(__dirname, 'src', 'lib', 'bastion', 'API.md'),
+  jest: false,
+});
+
 project.synth();
