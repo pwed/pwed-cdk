@@ -174,7 +174,13 @@ public applyRemovalPolicy(policy: RemovalPolicy): void
 
 Apply the given removal policy to this resource.
 
-The Removal Policy controls what happens to this resource when it stops being managed by CloudFormation, either because you've removed it from the CDK application or because you've made a change that requires the resource to be replaced.  The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
+The Removal Policy controls what happens to this resource when it stops
+being managed by CloudFormation, either because you've removed it from the
+CDK application or because you've made a change that requires the resource
+to be replaced.
+
+The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
+account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ###### `policy`<sup>Required</sup> <a name="policy" id="pwed-cdk.pwed_bastion.BastionPermissionSet.applyRemovalPolicy.parameter.policy"></a>
 
@@ -282,7 +288,12 @@ public readonly env: ResourceEnvironment;
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK (generally, those created by creating new class instances like Role, Bucket, etc.), this is always the same as the environment of the stack they belong to; however, for imported resources (those obtained from static methods like fromRoleArn, fromBucketName, etc.), that might be different than the stack they were imported into.
+For resources that are created and managed by the CDK
+(generally, those created by creating new class instances like Role, Bucket, etc.),
+this is always the same as the environment of the stack they belong to;
+however, for imported resources
+(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
+that might be different than the stack they were imported into.
 
 ---
 
@@ -372,7 +383,13 @@ public applyRemovalPolicy(policy: RemovalPolicy): void
 
 Apply the given removal policy to this resource.
 
-The Removal Policy controls what happens to this resource when it stops being managed by CloudFormation, either because you've removed it from the CDK application or because you've made a change that requires the resource to be replaced.  The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
+The Removal Policy controls what happens to this resource when it stops
+being managed by CloudFormation, either because you've removed it from the
+CDK application or because you've made a change that requires the resource
+to be replaced.
+
+The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
+account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ###### `policy`<sup>Required</sup> <a name="policy" id="pwed-cdk.pwed_bastion.LinuxBastion.applyRemovalPolicy.parameter.policy"></a>
 
@@ -465,7 +482,12 @@ public readonly env: ResourceEnvironment;
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK (generally, those created by creating new class instances like Role, Bucket, etc.), this is always the same as the environment of the stack they belong to; however, for imported resources (those obtained from static methods like fromRoleArn, fromBucketName, etc.), that might be different than the stack they were imported into.
+For resources that are created and managed by the CDK
+(generally, those created by creating new class instances like Role, Bucket, etc.),
+this is always the same as the environment of the stack they belong to;
+however, for imported resources
+(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
+that might be different than the stack they were imported into.
 
 ---
 
@@ -863,7 +885,13 @@ public applyRemovalPolicy(policy: RemovalPolicy): void
 
 Apply the given removal policy to this resource.
 
-The Removal Policy controls what happens to this resource when it stops being managed by CloudFormation, either because you've removed it from the CDK application or because you've made a change that requires the resource to be replaced.  The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
+The Removal Policy controls what happens to this resource when it stops
+being managed by CloudFormation, either because you've removed it from the
+CDK application or because you've made a change that requires the resource
+to be replaced.
+
+The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
+account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ###### `policy`<sup>Required</sup> <a name="policy" id="pwed-cdk.pwed_bastion.WindowsBastion.applyRemovalPolicy.parameter.policy"></a>
 
@@ -956,7 +984,12 @@ public readonly env: ResourceEnvironment;
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK (generally, those created by creating new class instances like Role, Bucket, etc.), this is always the same as the environment of the stack they belong to; however, for imported resources (those obtained from static methods like fromRoleArn, fromBucketName, etc.), that might be different than the stack they were imported into.
+For resources that are created and managed by the CDK
+(generally, those created by creating new class instances like Role, Bucket, etc.),
+this is always the same as the environment of the stack they belong to;
+however, for imported resources
+(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
+that might be different than the stack they were imported into.
 
 ---
 
@@ -1203,7 +1236,10 @@ public readonly blockDevices: BlockDevice[];
 
 Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.
 
-Each instance that is launched has an associated root device volume, either an Amazon EBS volume or an instance store volume. You can use block device mappings to specify additional EBS volumes or instance store volumes to attach to an instance when it is launched.
+Each instance that is launched has an associated root device volume,
+either an Amazon EBS volume or an instance store volume.
+You can use block device mappings to specify additional EBS volumes or
+instance store volumes to attach to an instance when it is launched.
 
 > [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 
@@ -1277,6 +1313,15 @@ An IAM role to associate with the instance profile assigned to this Auto Scaling
 The role must be assumable by the service principal `ec2.amazonaws.com`:
 
 ---
+
+*Example*
+
+```typescript
+const role = new iam.Role(this, 'MyRole', {
+  assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com')
+});
+```
+
 
 ##### `securityGroup`<sup>Optional</sup> <a name="securityGroup" id="pwed-cdk.pwed_bastion.BastionInstanceProps.property.securityGroup"></a>
 
@@ -1538,7 +1583,10 @@ public readonly blockDevices: BlockDevice[];
 
 Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.
 
-Each instance that is launched has an associated root device volume, either an Amazon EBS volume or an instance store volume. You can use block device mappings to specify additional EBS volumes or instance store volumes to attach to an instance when it is launched.
+Each instance that is launched has an associated root device volume,
+either an Amazon EBS volume or an instance store volume.
+You can use block device mappings to specify additional EBS volumes or
+instance store volumes to attach to an instance when it is launched.
 
 > [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 
@@ -1612,6 +1660,15 @@ An IAM role to associate with the instance profile assigned to this Auto Scaling
 The role must be assumable by the service principal `ec2.amazonaws.com`:
 
 ---
+
+*Example*
+
+```typescript
+const role = new iam.Role(this, 'MyRole', {
+  assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com')
+});
+```
+
 
 ##### `securityGroup`<sup>Optional</sup> <a name="securityGroup" id="pwed-cdk.pwed_bastion.LinuxBastionProps.property.securityGroup"></a>
 
@@ -1880,7 +1937,10 @@ public readonly blockDevices: BlockDevice[];
 
 Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.
 
-Each instance that is launched has an associated root device volume, either an Amazon EBS volume or an instance store volume. You can use block device mappings to specify additional EBS volumes or instance store volumes to attach to an instance when it is launched.
+Each instance that is launched has an associated root device volume,
+either an Amazon EBS volume or an instance store volume.
+You can use block device mappings to specify additional EBS volumes or
+instance store volumes to attach to an instance when it is launched.
 
 > [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 
@@ -1955,6 +2015,15 @@ The role must be assumable by the service principal `ec2.amazonaws.com`:
 
 ---
 
+*Example*
+
+```typescript
+const role = new iam.Role(this, 'MyRole', {
+  assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com')
+});
+```
+
+
 ##### `securityGroup`<sup>Optional</sup> <a name="securityGroup" id="pwed-cdk.pwed_bastion.WindowsBastionProps.property.securityGroup"></a>
 
 ```typescript
@@ -2017,6 +2086,8 @@ List of packages to be installed as part of the userdata using winget.
 
 ### LinuxPackageManager <a name="LinuxPackageManager" id="pwed-cdk.pwed_bastion.LinuxPackageManager"></a>
 
+#### Members <a name="Members" id="Members"></a>
+
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#pwed-cdk.pwed_bastion.LinuxPackageManager.APT">APT</a></code> | *No description.* |
@@ -2025,17 +2096,17 @@ List of packages to be installed as part of the userdata using winget.
 
 ---
 
-#### `APT` <a name="APT" id="pwed-cdk.pwed_bastion.LinuxPackageManager.APT"></a>
+##### `APT` <a name="APT" id="pwed-cdk.pwed_bastion.LinuxPackageManager.APT"></a>
 
 ---
 
 
-#### `YUM` <a name="YUM" id="pwed-cdk.pwed_bastion.LinuxPackageManager.YUM"></a>
+##### `YUM` <a name="YUM" id="pwed-cdk.pwed_bastion.LinuxPackageManager.YUM"></a>
 
 ---
 
 
-#### `DNF` <a name="DNF" id="pwed-cdk.pwed_bastion.LinuxPackageManager.DNF"></a>
+##### `DNF` <a name="DNF" id="pwed-cdk.pwed_bastion.LinuxPackageManager.DNF"></a>
 
 ---
 
