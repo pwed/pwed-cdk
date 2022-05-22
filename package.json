@@ -53,10 +53,10 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^26.6.3",
     "jest-junit": "^13",
-    "jsii": "^1.56.0",
-    "jsii-diff": "^1.56.0",
-    "jsii-docgen": "^6.3.14",
-    "jsii-pacmak": "^1.57.0",
+    "jsii": "^1.59.0",
+    "jsii-diff": "^1.59.0",
+    "jsii-docgen": "^6.3.27",
+    "jsii-pacmak": "^1.59.0",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
     "prettier": "^2.6.2",
@@ -71,9 +71,9 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "cdk-ec2-key-pair": "^3.2.0",
+    "cdk-ec2-key-pair": "^3.3.1",
     "cdk-iam-floyd": "0.300.0",
-    "glob": "^7.2.0"
+    "glob": "^7.2.3"
   },
   "bundledDependencies": [
     "cdk-ec2-key-pair",
