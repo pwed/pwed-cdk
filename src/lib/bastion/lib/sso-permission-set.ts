@@ -1,7 +1,6 @@
 import { aws_iam, aws_sso, Resource, Tag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { BastionAccessPolicyProps } from '..';
-import { BastionAccessPolicy } from './access-policy';
+import { BastionAccessPolicy, BastionAccessPolicyProps } from './access-policy';
 import { DefaultSecurityTag } from './security-tag';
 
 export interface BastionPermissionSetProps
