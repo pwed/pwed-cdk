@@ -1,5 +1,5 @@
-import { awscdk } from 'projen';
-const project = new awscdk.AwsCdkConstructLibrary({
+var projen = require('projen');
+const project = new projen.awscdk.AwsCdkConstructLibrary({
   name: 'pwed-cdk',
   description: 'A library of AWS CDK constructs that I have created',
   repositoryUrl: 'https://github.com/pwed/pwed-cdk.git',
