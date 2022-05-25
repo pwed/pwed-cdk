@@ -19,7 +19,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
     'cdk-iam-floyd@0.300.0',
-    '@types/prettier@2.6.0',
+    // '@types/prettier@2.6.0',
   ] /* Build dependencies for this module. */,
   // packageName: undefined,  /* The "name" in package.json. */
 
@@ -42,6 +42,5 @@ const project = new awscdk.AwsCdkConstructLibrary({
     distName: 'pwed-cdk',
     module: 'pwed_cdk',
   },
-  projenrcTs: true,
 });
 project.synth();
