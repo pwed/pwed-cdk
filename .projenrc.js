@@ -36,6 +36,12 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
     dirs: ['src'],
   },
 
+  depsUpgradeOptions: {
+    workflowOptions: {
+      schedule: projen.javascript.UpgradeDependenciesSchedule.MONTHLY,
+    },
+  },
+
   // Publishing
   releaseToNpm: true,
   publishToPypi: {
