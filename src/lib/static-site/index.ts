@@ -23,6 +23,7 @@ export interface StaticSiteProps {
 }
 
 export class StaticSite extends Construct {
+  distribution: aws_cloudfront.IDistribution;
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
@@ -62,7 +63,7 @@ export class StaticSite extends Construct {
     );
     bucket.grantRead(originAccessIdentity);
 
-    const distribution = new aws_cloudfront.Distribution(this, 'Distribution', {
+    this.distribution = new aws_cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new aws_cloudfront_origins.S3Origin(bucket, {
           originAccessIdentity,
@@ -87,14 +88,14 @@ export class StaticSite extends Construct {
       recordName: props.domain,
       zone: hostedZone,
       target: aws_route53.RecordTarget.fromAlias(
-        new aws_route53_targets.CloudFrontTarget(distribution)
+        new aws_route53_targets.CloudFrontTarget(this.distribution)
       ),
     });
     new aws_route53.AaaaRecord(this, 'AaaaAliasRecord', {
       recordName: props.domain,
       zone: hostedZone,
       target: aws_route53.RecordTarget.fromAlias(
-        new aws_route53_targets.CloudFrontTarget(distribution)
+        new aws_route53_targets.CloudFrontTarget(this.distribution)
       ),
     });
 
@@ -107,7 +108,7 @@ export class StaticSite extends Construct {
     new aws_s3_deployment.BucketDeployment(this, 'StaticDeployment', {
       sources: [aws_s3_deployment.Source.asset(props.path)],
       destinationBucket: bucket,
-      distribution: distribution,
+      distribution: this.distribution,
       distributionPaths: invalidations,
     });
   }
