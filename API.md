@@ -806,6 +806,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#pwed-cdk.pwed_static_site.StaticSite.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#pwed-cdk.pwed_static_site.StaticSite.property.distribution">distribution</a></code> | <code>aws-cdk-lib.aws_cloudfront.IDistribution</code> | *No description.* |
 
 ---
 
@@ -818,6 +819,16 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+##### `distribution`<sup>Required</sup> <a name="distribution" id="pwed-cdk.pwed_static_site.StaticSite.property.distribution"></a>
+
+```typescript
+public readonly distribution: IDistribution;
+```
+
+- *Type:* aws-cdk-lib.aws_cloudfront.IDistribution
 
 ---
 
