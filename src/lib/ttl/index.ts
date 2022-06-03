@@ -70,7 +70,7 @@ def handler(event, context):
       handler: 'ttl.handler',
       environment: {
         TTL: ttl.toSeconds().toString(),
-        STACK_NAME: Fn.ref('AWS:AccountId'),
+        STACK_NAME: Fn.ref('AWS::AccountId'),
       },
       role: new aws_iam.Role(this, 'TtlRole', {
         assumedBy: new aws_iam.ServicePrincipal('lambda.amazonaws.com'),

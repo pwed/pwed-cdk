@@ -100,7 +100,7 @@ def handler(event, context):
         "Environment": Object {
           "Variables": Object {
             "STACK_NAME": Object {
-              "Ref": "AWS:AccountId",
+              "Ref": "AWS::AccountId",
             },
             "TTL": "14400",
           },
