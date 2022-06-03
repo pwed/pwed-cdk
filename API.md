@@ -833,6 +833,105 @@ public readonly distribution: IDistribution;
 ---
 
 
+### Ttl <a name="Ttl" id="pwed-cdk.pwed_ttl.Ttl"></a>
+
+#### Initializers <a name="Initializers" id="pwed-cdk.pwed_ttl.Ttl.Initializer"></a>
+
+```typescript
+import { pwed_ttl } from 'pwed-cdk'
+
+new pwed_ttl.Ttl(scope: Construct, id: string, props: TtlProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#pwed-cdk.pwed_ttl.Ttl.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#pwed-cdk.pwed_ttl.Ttl.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#pwed-cdk.pwed_ttl.Ttl.Initializer.parameter.props">props</a></code> | <code>pwed-cdk.pwed_ttl.TtlProps</code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="pwed-cdk.pwed_ttl.Ttl.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="pwed-cdk.pwed_ttl.Ttl.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="pwed-cdk.pwed_ttl.Ttl.Initializer.parameter.props"></a>
+
+- *Type:* pwed-cdk.pwed_ttl.TtlProps
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#pwed-cdk.pwed_ttl.Ttl.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="pwed-cdk.pwed_ttl.Ttl.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#pwed-cdk.pwed_ttl.Ttl.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="pwed-cdk.pwed_ttl.Ttl.isConstruct"></a>
+
+```typescript
+import { pwed_ttl } from 'pwed-cdk'
+
+pwed_ttl.Ttl.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="pwed-cdk.pwed_ttl.Ttl.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#pwed-cdk.pwed_ttl.Ttl.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="pwed-cdk.pwed_ttl.Ttl.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+
 ### WindowsBastion <a name="WindowsBastion" id="pwed-cdk.pwed_bastion.WindowsBastion"></a>
 
 - *Implements:* aws-cdk-lib.aws_ec2.IInstance
@@ -1866,6 +1965,45 @@ public readonly hostedZone: IHostedZone;
 ```
 
 - *Type:* aws-cdk-lib.aws_route53.IHostedZone
+
+---
+
+### TtlProps <a name="TtlProps" id="pwed-cdk.pwed_ttl.TtlProps"></a>
+
+#### Initializer <a name="Initializer" id="pwed-cdk.pwed_ttl.TtlProps.Initializer"></a>
+
+```typescript
+import { pwed_ttl } from 'pwed-cdk'
+
+const ttlProps: pwed_ttl.TtlProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#pwed-cdk.pwed_ttl.TtlProps.property.ttl">ttl</a></code> | <code>aws-cdk-lib.Duration</code> | *No description.* |
+| <code><a href="#pwed-cdk.pwed_ttl.TtlProps.property.pollInterval">pollInterval</a></code> | <code>aws-cdk-lib.Duration</code> | *No description.* |
+
+---
+
+##### `ttl`<sup>Required</sup> <a name="ttl" id="pwed-cdk.pwed_ttl.TtlProps.property.ttl"></a>
+
+```typescript
+public readonly ttl: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+
+---
+
+##### `pollInterval`<sup>Optional</sup> <a name="pollInterval" id="pwed-cdk.pwed_ttl.TtlProps.property.pollInterval"></a>
+
+```typescript
+public readonly pollInterval: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
 
 ---
 
