@@ -1,3 +1,3 @@
-export * as pwed_bastion from './lib/bastion';
-export * as pwed_static_site from './lib/static-site';
-export * as pwed_ttl from './lib/ttl';
+export * as bastion from './lib/bastion';
+export * as static_site from './lib/static-site';
+export * as ttl from './lib/ttl';
