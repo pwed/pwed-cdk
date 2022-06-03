@@ -78,6 +78,7 @@ def handler(event, context):
           aws_iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess'),
         ],
       }),
+      logRetention: 1,
     });
 
     new aws_events.Rule(this, 'IntercalSchedule', {
