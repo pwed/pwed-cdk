@@ -67,10 +67,10 @@ def handler(event, context):
 
     print(f"not deleting stack yet, {delta} seconds remaining")
     return`),
-      handler: 'ttl.handler',
+      handler: 'index.handler',
       environment: {
         TTL: ttl.toSeconds().toString(),
-        STACK_NAME: Fn.ref('AWS::AccountId'),
+        STACK_NAME: Fn.ref('AWS::StackName'),
       },
       role: new aws_iam.Role(this, 'TtlRole', {
         assumedBy: new aws_iam.ServicePrincipal('lambda.amazonaws.com'),

@@ -100,12 +100,12 @@ def handler(event, context):
         "Environment": Object {
           "Variables": Object {
             "STACK_NAME": Object {
-              "Ref": "AWS::AccountId",
+              "Ref": "AWS::StackName",
             },
             "TTL": "14400",
           },
         },
-        "Handler": "ttl.handler",
+        "Handler": "index.handler",
         "Role": Object {
           "Fn::GetAtt": Array [
             "MyTestConstructTtlRole7D1EB42B",
