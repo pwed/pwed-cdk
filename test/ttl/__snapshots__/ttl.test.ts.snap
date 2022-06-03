@@ -53,10 +53,49 @@ Object {
       ],
       "Properties": Object {
         "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
-          },
-          "S3Key": "78294a1e1a04275f6ee9de1cdb232e2d0260c7a8c943097d6dddefe3eafd8662.zip",
+          "ZipFile": "#!/bin/env python
+import boto3
+import os
+import time
+import logging
+
+log = logging.Logger(\\"logger\\")
+log.setLevel(\\"INFO\\")
+
+def handler(event, context):
+    print(event)
+
+    stack_name = os.environ['STACK_NAME']
+    ttl = int(os.environ['TTL'])
+    cfn = boto3.client('cloudformation')
+
+    print(
+        f\\"\\"\\"
+        StackName: {stack_name}
+        TTL:       {ttl}
+        \\"\\"\\"
+    )
+
+    stack = cfn.describe_stacks(StackName=stack_name)
+    creation_time = stack['Stacks'][0]['CreationTime']
+    creation_time_epoch = int(time.mktime(creation_time.timetuple()))
+
+    now = time.time()
+    delta = now - creation_time_epoch
+    print(
+        f\\"\\"\\"
+        Now:           {now}
+        Creation Time: {creation_time}
+        Delta:         {delta}
+        \\"\\"\\"
+    )
+    if delta > ttl:
+        print(f\\"deleting stack: {stack_name}\\")
+        cfn.delete_stack(StackName=stack_name)
+        return
+
+    print(f\\"not deleting stack yet, {delta} seconds remaining\\")
+    return",
         },
         "Environment": Object {
           "Variables": Object {
