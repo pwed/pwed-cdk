@@ -88,26 +88,7 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-    "MyTestConstructIntercalScheduleAllowEventRuleTestStackMyTestConstructTtlFunction4874FE203DE981DE": Object {
-      "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "MyTestConstructTtlFunction4D5B5376",
-            "Arn",
-          ],
-        },
-        "Principal": "events.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::GetAtt": Array [
-            "MyTestConstructIntercalScheduleC61E49E8",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "MyTestConstructIntercalScheduleC61E49E8": Object {
+    "MyTestConstructIntervalSchedule13244702": Object {
       "Properties": Object {
         "ScheduleExpression": "rate(1 hour)",
         "State": "ENABLED",
@@ -124,6 +105,25 @@ Object {
         ],
       },
       "Type": "AWS::Events::Rule",
+    },
+    "MyTestConstructIntervalScheduleAllowEventRuleTestStackMyTestConstructTtlFunction4874FE208BC79123": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "MyTestConstructTtlFunction4D5B5376",
+            "Arn",
+          ],
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::GetAtt": Array [
+            "MyTestConstructIntervalSchedule13244702",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
     },
     "MyTestConstructTtlFunction4D5B5376": Object {
       "DependsOn": Array [
