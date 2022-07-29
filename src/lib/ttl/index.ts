@@ -81,7 +81,7 @@ def handler(event, context):
       logRetention: 1,
     });
 
-    new aws_events.Rule(this, 'IntercalSchedule', {
+    new aws_events.Rule(this, 'IntervalSchedule', {
       schedule: aws_events.Schedule.rate(pollInterval),
       targets: [new aws_events_targets.LambdaFunction(ttlLambda)],
     });
