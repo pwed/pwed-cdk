@@ -86,7 +86,10 @@ export class StaticSite extends Construct {
     });
     const cfnDistribution = this.distribution.node
       .defaultChild as aws_cloudfront.CfnDistribution;
-    cfnDistribution.addOverride('DistributionConfig.HttpVersion', 'http2and3');
+    cfnDistribution.addOverride(
+      'Properties.DistributionConfig.HttpVersion',
+      'http2and3'
+    );
 
     new aws_route53.ARecord(this, 'AAliasRecord', {
       recordName: props.domain,

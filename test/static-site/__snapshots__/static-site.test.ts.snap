@@ -354,9 +354,6 @@ Object {
       "Type": "AWS::CertificateManager::Certificate",
     },
     "MyTestConstructDistribution60637A64": Object {
-      "DistributionConfig": Object {
-        "HttpVersion": "http2and3",
-      },
       "Properties": Object {
         "DistributionConfig": Object {
           "Aliases": Array [
@@ -382,7 +379,7 @@ Object {
           },
           "DefaultRootObject": "index.html",
           "Enabled": true,
-          "HttpVersion": "http2",
+          "HttpVersion": "http2and3",
           "IPV6Enabled": true,
           "Origins": Array [
             Object {
