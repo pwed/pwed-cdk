@@ -128,6 +128,23 @@ export class StaticSite extends Construct {
       ),
     });
 
+    props.alternativeDomains?.map((domain, index) => {
+      new aws_route53.ARecord(this, `AAliasRecord${domain}`, {
+        recordName: domain,
+        zone: alternativeHostedZones![index],
+        target: aws_route53.RecordTarget.fromAlias(
+          new aws_route53_targets.CloudFrontTarget(this.distribution)
+        ),
+      });
+      new aws_route53.AaaaRecord(this, `AaaaAliasRecord${domain}`, {
+        recordName: domain,
+        zone: alternativeHostedZones![index],
+        target: aws_route53.RecordTarget.fromAlias(
+          new aws_route53_targets.CloudFrontTarget(this.distribution)
+        ),
+      });
+    });
+
     const hashFile = '/.hashfile';
     let invalidations: string[] = [hashFile];
     invalidations.push(
