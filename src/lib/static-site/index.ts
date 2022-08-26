@@ -18,7 +18,9 @@ import { sync as globSync } from 'glob';
 
 export interface StaticSiteProps {
   readonly domain: string;
+  readonly alternativeDomains?: string[];
   readonly hostedZone?: aws_route53.IHostedZone;
+  readonly alternativeHostedZones?: aws_route53.IHostedZone[];
   readonly path: string;
 }
 
@@ -43,17 +45,41 @@ export class StaticSite extends Construct {
 
     const hostedZone = props.hostedZone
       ? props.hostedZone
-      : aws_route53.HostedZone.fromLookup(this, 'HostedZone', {
+      : aws_route53.HostedZone.fromLookup(this, `HostedZone${props.domain}`, {
           domainName: props.domain,
         });
+
+    const alternativeHostedZones = props.alternativeHostedZones
+      ? props.alternativeHostedZones
+      : props.alternativeDomains
+      ? props.alternativeDomains.map((domain) => {
+          return aws_route53.HostedZone.fromLookup(
+            this,
+            `HostedZone${domain}`,
+            {
+              domainName: domain,
+            }
+          );
+        })
+      : undefined;
+    let domainValidation = {
+      [props.domain]: hostedZone,
+    };
+
+    props.alternativeDomains?.map((domain, index) => {
+      domainValidation[domain] = alternativeHostedZones![index];
+    });
 
     const certificate = new aws_certificatemanager.Certificate(
       this,
       'Certificate',
       {
         domainName: props.domain,
+        subjectAlternativeNames: props.alternativeDomains,
         validation:
-          aws_certificatemanager.CertificateValidation.fromDns(hostedZone),
+          aws_certificatemanager.CertificateValidation.fromDnsMultiZone(
+            domainValidation
+          ),
       }
     );
 
@@ -72,7 +98,9 @@ export class StaticSite extends Construct {
         viewerProtocolPolicy:
           aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
-      domainNames: [props.domain],
+      domainNames: props.alternativeDomains
+        ? [props.domain, ...props.alternativeDomains]
+        : [props.domain],
       certificate,
       errorResponses: [
         {
@@ -82,14 +110,8 @@ export class StaticSite extends Construct {
         },
       ],
       defaultRootObject: 'index.html',
-      // httpVersion: 'http2and3',
+      httpVersion: aws_cloudfront.HttpVersion.HTTP2_AND_3,
     });
-    const cfnDistribution = this.distribution.node
-      .defaultChild as aws_cloudfront.CfnDistribution;
-    cfnDistribution.addOverride(
-      'Properties.DistributionConfig.HttpVersion',
-      'http2and3'
-    );
 
     new aws_route53.ARecord(this, 'AAliasRecord', {
       recordName: props.domain,

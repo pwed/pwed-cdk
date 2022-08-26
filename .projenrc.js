@@ -7,7 +7,7 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
   author: 'Fred Stoddart',
   authorAddress: 'pwed@users.noreply.github.com',
 
-  cdkVersion: '2.5.0',
+  cdkVersion: '2.39.0',
   defaultReleaseBranch: 'main',
   stability: 'experimental',
   keywords: ['cdk', 'aws'],

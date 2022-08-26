@@ -217,6 +217,7 @@ public assign(accountId: string, principalId: string, principalType: string): vo
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSet.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#pwed-cdk.bastion.BastionPermissionSet.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSet.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
 
 ---
@@ -236,6 +237,22 @@ Checks if `x` is a construct.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `isOwnedResource` <a name="isOwnedResource" id="pwed-cdk.bastion.BastionPermissionSet.isOwnedResource"></a>
+
+```typescript
+import { bastion } from 'pwed-cdk'
+
+bastion.BastionPermissionSet.isOwnedResource(construct: IConstruct)
+```
+
+Returns true if the construct was created by CDK, and false otherwise.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="pwed-cdk.bastion.BastionPermissionSet.isOwnedResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
 
 ---
 
@@ -402,6 +419,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#pwed-cdk.bastion.LinuxBastion.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#pwed-cdk.bastion.LinuxBastion.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
 | <code><a href="#pwed-cdk.bastion.LinuxBastion.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
 
 ---
@@ -421,6 +439,22 @@ Checks if `x` is a construct.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `isOwnedResource` <a name="isOwnedResource" id="pwed-cdk.bastion.LinuxBastion.isOwnedResource"></a>
+
+```typescript
+import { bastion } from 'pwed-cdk'
+
+bastion.LinuxBastion.isOwnedResource(construct: IConstruct)
+```
+
+Returns true if the construct was created by CDK, and false otherwise.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="pwed-cdk.bastion.LinuxBastion.isOwnedResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
 
 ---
 
@@ -1014,6 +1048,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#pwed-cdk.bastion.WindowsBastion.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#pwed-cdk.bastion.WindowsBastion.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
 | <code><a href="#pwed-cdk.bastion.WindowsBastion.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
 
 ---
@@ -1033,6 +1068,22 @@ Checks if `x` is a construct.
 - *Type:* any
 
 Any object.
+
+---
+
+##### `isOwnedResource` <a name="isOwnedResource" id="pwed-cdk.bastion.WindowsBastion.isOwnedResource"></a>
+
+```typescript
+import { bastion } from 'pwed-cdk'
+
+bastion.WindowsBastion.isOwnedResource(construct: IConstruct)
+```
+
+Returns true if the construct was created by CDK, and false otherwise.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="pwed-cdk.bastion.WindowsBastion.isOwnedResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
 
 ---
 
@@ -1477,9 +1528,11 @@ const bastionPermissionSetProps: bastion.BastionPermissionSetProps = { ... }
 | --- | --- | --- |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.instanceArn">instanceArn</a></code> | <code>string</code> | The ARN of the SSO instance under which the operation will be executed. |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.name">name</a></code> | <code>string</code> | The name of the permission set. |
+| <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.customerManagedPolicyReferences">customerManagedPolicyReferences</a></code> | <code>aws-cdk-lib.IResolvable \| aws-cdk-lib.aws_sso.CfnPermissionSet.CustomerManagedPolicyReferenceProperty \| aws-cdk-lib.IResolvable[]</code> | `AWS::SSO::PermissionSet.CustomerManagedPolicyReferences`. |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.description">description</a></code> | <code>string</code> | The description of the `PermissionSet` . |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.inlinePolicy">inlinePolicy</a></code> | <code>any</code> | The IAM inline policy that is attached to the permission set. |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.managedPolicies">managedPolicies</a></code> | <code>string[]</code> | A structure that stores the details of the IAM managed policy. |
+| <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.permissionsBoundary">permissionsBoundary</a></code> | <code>aws-cdk-lib.aws_sso.CfnPermissionSet.PermissionsBoundaryProperty \| aws-cdk-lib.IResolvable</code> | `AWS::SSO::PermissionSet.PermissionsBoundary`. |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.relayStateType">relayStateType</a></code> | <code>string</code> | Used to redirect users within the application during the federation authentication process. |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.sessionDuration">sessionDuration</a></code> | <code>string</code> | The length of time that the application user sessions are valid for in the ISO-8601 standard. |
 | <code><a href="#pwed-cdk.bastion.BastionPermissionSetProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | The tags to attach to the new `PermissionSet` . |
@@ -1514,6 +1567,20 @@ public readonly name: string;
 The name of the permission set.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-name](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-name)
+
+---
+
+##### `customerManagedPolicyReferences`<sup>Optional</sup> <a name="customerManagedPolicyReferences" id="pwed-cdk.bastion.BastionPermissionSetProps.property.customerManagedPolicyReferences"></a>
+
+```typescript
+public readonly customerManagedPolicyReferences: IResolvable | CustomerManagedPolicyReferenceProperty | IResolvable[];
+```
+
+- *Type:* aws-cdk-lib.IResolvable | aws-cdk-lib.aws_sso.CfnPermissionSet.CustomerManagedPolicyReferenceProperty | aws-cdk-lib.IResolvable[]
+
+`AWS::SSO::PermissionSet.CustomerManagedPolicyReferences`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-customermanagedpolicyreferences](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-customermanagedpolicyreferences)
 
 ---
 
@@ -1556,6 +1623,20 @@ public readonly managedPolicies: string[];
 A structure that stores the details of the IAM managed policy.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-managedpolicies](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-managedpolicies)
+
+---
+
+##### `permissionsBoundary`<sup>Optional</sup> <a name="permissionsBoundary" id="pwed-cdk.bastion.BastionPermissionSetProps.property.permissionsBoundary"></a>
+
+```typescript
+public readonly permissionsBoundary: PermissionsBoundaryProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_sso.CfnPermissionSet.PermissionsBoundaryProperty | aws-cdk-lib.IResolvable
+
+`AWS::SSO::PermissionSet.PermissionsBoundary`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-permissionsboundary](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sso-permissionset.html#cfn-sso-permissionset-permissionsboundary)
 
 ---
 
@@ -1934,6 +2015,8 @@ const staticSiteProps: static_site.StaticSiteProps = { ... }
 | --- | --- | --- |
 | <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.domain">domain</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.path">path</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.alternativeDomains">alternativeDomains</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.alternativeHostedZones">alternativeHostedZones</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone[]</code> | *No description.* |
 | <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.hostedZone">hostedZone</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone</code> | *No description.* |
 
 ---
@@ -1955,6 +2038,26 @@ public readonly path: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `alternativeDomains`<sup>Optional</sup> <a name="alternativeDomains" id="pwed-cdk.static_site.StaticSiteProps.property.alternativeDomains"></a>
+
+```typescript
+public readonly alternativeDomains: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `alternativeHostedZones`<sup>Optional</sup> <a name="alternativeHostedZones" id="pwed-cdk.static_site.StaticSiteProps.property.alternativeHostedZones"></a>
+
+```typescript
+public readonly alternativeHostedZones: IHostedZone[];
+```
+
+- *Type:* aws-cdk-lib.aws_route53.IHostedZone[]
 
 ---
 
