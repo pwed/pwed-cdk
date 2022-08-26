@@ -1,7 +1,7 @@
 import * as child_process from 'child_process';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import * as path from 'path';
+import { join } from 'path';
 import * as process from 'process';
 import {
   aws_certificatemanager,
@@ -22,6 +22,7 @@ export interface StaticSiteProps {
   readonly hostedZone?: aws_route53.IHostedZone;
   readonly alternativeHostedZones?: aws_route53.IHostedZone[];
   readonly path: string;
+  readonly enablePrettyPaths?: boolean;
 }
 
 export class StaticSite extends Construct {
@@ -89,6 +90,18 @@ export class StaticSite extends Construct {
     );
     bucket.grantRead(originAccessIdentity);
 
+    let prettyPathHandler: aws_cloudfront.Function;
+    if (props.enablePrettyPaths)
+      prettyPathHandler = new aws_cloudfront.Function(
+        this,
+        'PrettyPathHandler',
+        {
+          code: aws_cloudfront.FunctionCode.fromFile({
+            filePath: join(__dirname, 'prettyPathHandler.js'),
+          }),
+        }
+      );
+
     this.distribution = new aws_cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new aws_cloudfront_origins.S3Origin(bucket, {
@@ -97,6 +110,14 @@ export class StaticSite extends Construct {
         allowedMethods: aws_cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         viewerProtocolPolicy:
           aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        functionAssociations: props.enablePrettyPaths
+          ? [
+              {
+                function: prettyPathHandler!,
+                eventType: aws_cloudfront.FunctionEventType.VIEWER_REQUEST,
+              },
+            ]
+          : undefined,
       },
       domainNames: props.alternativeDomains
         ? [props.domain, ...props.alternativeDomains]
@@ -197,7 +218,7 @@ function compareRemoteToLocal(
   let oldHashesJSON: string;
   const newHashes = getHashes('**', localFolder);
   fs.writeFileSync(
-    path.join(localFolder, hashFile),
+    join(localFolder, hashFile),
     JSON.stringify(Object.fromEntries(newHashes))
   );
   try {

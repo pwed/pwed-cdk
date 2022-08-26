@@ -2017,6 +2017,7 @@ const staticSiteProps: static_site.StaticSiteProps = { ... }
 | <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.path">path</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.alternativeDomains">alternativeDomains</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.alternativeHostedZones">alternativeHostedZones</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone[]</code> | *No description.* |
+| <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.enablePrettyPaths">enablePrettyPaths</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#pwed-cdk.static_site.StaticSiteProps.property.hostedZone">hostedZone</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone</code> | *No description.* |
 
 ---
@@ -2058,6 +2059,16 @@ public readonly alternativeHostedZones: IHostedZone[];
 ```
 
 - *Type:* aws-cdk-lib.aws_route53.IHostedZone[]
+
+---
+
+##### `enablePrettyPaths`<sup>Optional</sup> <a name="enablePrettyPaths" id="pwed-cdk.static_site.StaticSiteProps.property.enablePrettyPaths"></a>
+
+```typescript
+public readonly enablePrettyPaths: boolean;
+```
+
+- *Type:* boolean
 
 ---
 
