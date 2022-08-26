@@ -1,6 +1,10 @@
-function handler(event: any) {
-  const request = event.request;
-  const uri = request.uri;
+interface requestEvent {
+  request: { uri: string };
+}
+
+function handler(event: requestEvent) {
+  var request = event.request;
+  var uri = request.uri;
 
   // Check whether the URI is missing a file name.
   if (uri.endsWith('/')) {
