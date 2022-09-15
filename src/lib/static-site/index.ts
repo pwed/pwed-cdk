@@ -219,7 +219,7 @@ function compareRemoteToLocal(
   const newHashes = getHashes('**', localFolder);
   fs.writeFileSync(
     join(localFolder, hashFile),
-    JSON.stringify(Object.fromEntries(newHashes))
+    JSON.stringify(Object.fromEntries(newHashes), null, 2)
   );
   const curl = `curl -s https://${domain}${hashFile}`;
   try {
