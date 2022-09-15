@@ -166,7 +166,7 @@ export class StaticSite extends Construct {
       });
     });
 
-    const hashFile = '/.hashfile';
+    const hashFile = '/.hashfile.json';
     let invalidations: string[] = [hashFile];
     invalidations.push(
       ...compareRemoteToLocal(props.domain, hashFile, props.path)
