@@ -225,9 +225,9 @@ function compareRemoteToLocal(
     oldHashesJSON = child_process
       .execSync(`curl -s https://${domain}/${hashFile}`)
       .toString();
-  } catch e {
-    return ['/*'];
+  } catch (e) {
     console.error(e);
+    return ['/*'];
   }
   let oldHashes: Map<string, string>;
   try {
