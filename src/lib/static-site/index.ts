@@ -221,17 +221,17 @@ function compareRemoteToLocal(
     join(localFolder, hashFile),
     JSON.stringify(Object.fromEntries(newHashes))
   );
+  const curl = `curl -s https://${domain}${hashFile}`;
   try {
-    oldHashesJSON = child_process
-      .execSync(`curl -s https://${domain}/${hashFile}`)
-      .toString();
+    oldHashesJSON = child_process.execSync(curl).toString();
   } catch (e) {
     console.error(e);
+    console.error(curl);
     return ['/*'];
   }
   let oldHashes: Map<string, string>;
   try {
-    oldHashes = new Map(Object.entries(JSON.parse(oldHashesJSON!)));
+    oldHashes = new Map(Object.entries(JSON.parse(oldHashesJSON)));
   } catch (e) {
     return ['/*'];
   }
