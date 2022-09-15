@@ -450,7 +450,7 @@ Object {
           "Ref": "MyTestConstructDistribution60637A64",
         },
         "DistributionPaths": Array [
-          "/.hashfile",
+          "/.hashfile.json",
           "/*",
         ],
         "Prune": true,
@@ -466,7 +466,7 @@ Object {
           },
         ],
         "SourceObjectKeys": Array [
-          "e68716fff4c319c8e3ae7fd5ebbf664504e7548ccee6c0b7da080ece1e5b1fb4.zip",
+          "80363dc52072ba0904d5e078e678e2dc2615ed3f632d98584367d11ee403aa64.zip",
         ],
       },
       "Type": "Custom::CDKBucketDeployment",
