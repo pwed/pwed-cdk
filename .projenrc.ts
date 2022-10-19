@@ -1,4 +1,4 @@
-var projen = require('projen');
+import * as projen from 'projen';
 const project = new projen.awscdk.AwsCdkConstructLibrary({
   name: 'pwed-cdk',
   description: 'A library of AWS CDK constructs that I have created',
@@ -15,13 +15,8 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
 
   deps: ['cdk-iam-floyd@0.300.0'],
   bundledDeps: ['glob', 'cdk-ec2-key-pair', 'cdk-iam-floyd'],
-  peerDeps: [], // * Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: [
-    'cdk-iam-floyd@0.300.0',
-    // '@types/prettier@2.6.0',
-  ] /* Build dependencies for this module. */,
-  // packageName: undefined,  /* The "name" in package.json. */
+  peerDeps: [], // Runtime dependencies of this module.
+  devDeps: ['cdk-iam-floyd@0.300.0'],
 
   prettier: true,
   prettierOptions: {
@@ -43,10 +38,19 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
   },
 
   // Publishing
+  // releaseWorkflowSetupSteps: [
+  //   {
+  //     name: 'Install acl',
+  //     run: 'apt-get update && apt-get install -y acl',
+  //   },
+  // ],
   releaseToNpm: true,
   publishToPypi: {
     distName: 'pwed-cdk',
     module: 'pwed_cdk',
   },
+
+  devContainer: true,
+  projenrcTs: true,
 });
 project.synth();
