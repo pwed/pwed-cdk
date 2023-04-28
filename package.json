@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "aws-cdk-lib": "2.39.0",
-    "cdk-iam-floyd": "0.300.0",
+    "cdk-iam-floyd": "0.504.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-config-prettier": "^8.5.0",
@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "cdk-ec2-key-pair": "^3.3.1",
-    "cdk-iam-floyd": "0.300.0",
+    "cdk-iam-floyd": "0.504.0",
     "glob": "^8.0.3"
   },
   "bundledDependencies": [

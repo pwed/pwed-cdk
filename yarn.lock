@@ -1557,10 +1557,10 @@ cdk-ec2-key-pair@^3.3.1:
   resolved "https://registry.yarnpkg.com/cdk-ec2-key-pair/-/cdk-ec2-key-pair-3.3.1.tgz#b2e10aa1bb780bdcfe807221c19015d40ee4f0f3"
   integrity sha512-CmGy2ebHK+sZYJmylERt5QnsmFm/4Kjuqc0A3DdWTu28j+foAAPF5KjzgwRcNerqnwys56MI4zjWgNBiyXUPpA==
 
-cdk-iam-floyd@0.300.0:
-  version "0.300.0"
-  resolved "https://registry.yarnpkg.com/cdk-iam-floyd/-/cdk-iam-floyd-0.300.0.tgz#1cb165e724b8cfbdf28a63e5f9b5c24c52ba77a2"
-  integrity sha512-BPHzbC8NSpqAB89vP+QxSuF6vhAbKo+3yGc/G5W1R2znN35t9lQJKDysILZ7iXGbwGAQSrB/IYt6ilePtctoaQ==
+cdk-iam-floyd@0.504.0:
+  version "0.504.0"
+  resolved "https://registry.yarnpkg.com/cdk-iam-floyd/-/cdk-iam-floyd-0.504.0.tgz#31ea11da83e5fa1e3dfb4c2d7a25301a047f3f04"
+  integrity sha512-liSOGZCCM6t3oIAiCenmEUsRB1wMXbx1mMv6wdIz/ZtjWo5tEmrO6WjoyiOtYK+DPbsnkEgWoweNyLvj6H9SBQ==
   dependencies:
     "@udondan/common-substrings" "^3.0.2"
     regex-parser "^2.2.11"
