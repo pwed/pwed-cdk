@@ -1613,10 +1613,10 @@ cdk-ec2-key-pair@^3.3.1:
   resolved "https://registry.yarnpkg.com/cdk-ec2-key-pair/-/cdk-ec2-key-pair-3.3.1.tgz#b2e10aa1bb780bdcfe807221c19015d40ee4f0f3"
   integrity sha512-CmGy2ebHK+sZYJmylERt5QnsmFm/4Kjuqc0A3DdWTu28j+foAAPF5KjzgwRcNerqnwys56MI4zjWgNBiyXUPpA==
 
-cdk-iam-floyd@0.300.0:
-  version "0.300.0"
-  resolved "https://registry.yarnpkg.com/cdk-iam-floyd/-/cdk-iam-floyd-0.300.0.tgz#1cb165e724b8cfbdf28a63e5f9b5c24c52ba77a2"
-  integrity sha512-BPHzbC8NSpqAB89vP+QxSuF6vhAbKo+3yGc/G5W1R2znN35t9lQJKDysILZ7iXGbwGAQSrB/IYt6ilePtctoaQ==
+cdk-iam-floyd@0.504.0:
+  version "0.504.0"
+  resolved "https://registry.yarnpkg.com/cdk-iam-floyd/-/cdk-iam-floyd-0.504.0.tgz#31ea11da83e5fa1e3dfb4c2d7a25301a047f3f04"
+  integrity sha512-liSOGZCCM6t3oIAiCenmEUsRB1wMXbx1mMv6wdIz/ZtjWo5tEmrO6WjoyiOtYK+DPbsnkEgWoweNyLvj6H9SBQ==
   dependencies:
     "@udondan/common-substrings" "^3.0.2"
     regex-parser "^2.2.11"
@@ -2995,7 +2995,7 @@ glob@^7.0.0, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.2.0, gl
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^8, glob@^8.1.0:
+glob@^8, glob@^8.0.3:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/glob/-/glob-8.1.0.tgz#d388f656593ef708ee3e34640fdfb99a9fd1c33e"
   integrity sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==
@@ -4170,7 +4170,7 @@ jsii-reflect@^1.80.0, jsii-reflect@^1.84.0:
     oo-ascii-tree "^1.84.0"
     yargs "^16.2.0"
 
-jsii-rosetta@^1.80.0, jsii-rosetta@^1.84.0:
+jsii-rosetta@1.x, jsii-rosetta@^1.80.0, jsii-rosetta@^1.84.0:
   version "1.84.0"
   resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-1.84.0.tgz#1dca8518f4ae6780beb8d73b54b013a3a1420b8e"
   integrity sha512-VrXmc6utiNs3eNTKxVky0LTxoQrsh5GuEGyfj9ihwCkojYBJ3w80PdkMQEeRpWGdaCLEocjpy1X67xgZ4ZbPlg==

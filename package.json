@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "aws-cdk-lib": "2.39.0",
-    "cdk-iam-floyd": "0.300.0",
+    "cdk-iam-floyd": "0.504.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-config-prettier": "^8.8.0",
@@ -55,6 +55,7 @@
     "jsii-diff": "^1.84.0",
     "jsii-docgen": "^7.2.9",
     "jsii-pacmak": "^1.84.0",
+    "jsii-rosetta": "1.x",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
     "projen": "^0.71.118",
@@ -69,8 +70,8 @@
   },
   "dependencies": {
     "cdk-ec2-key-pair": "^3.3.1",
-    "cdk-iam-floyd": "0.300.0",
-    "glob": "^8.1.0"
+    "cdk-iam-floyd": "0.504.0",
+    "glob": "^8.0.3"
   },
   "bundledDependencies": [
     "cdk-ec2-key-pair",
