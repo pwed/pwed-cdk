@@ -13,10 +13,10 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
   keywords: ['cdk', 'aws'],
   license: 'MIT',
 
-  deps: ['cdk-iam-floyd@0.300.0'],
+  deps: ['cdk-iam-floyd@0.504.0'],
   bundledDeps: ['glob', 'cdk-ec2-key-pair', 'cdk-iam-floyd'],
   peerDeps: [], // Runtime dependencies of this module.
-  devDeps: ['cdk-iam-floyd@0.300.0'],
+  devDeps: ['cdk-iam-floyd@0.504.0'],
 
   prettier: true,
   prettierOptions: {
