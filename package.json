@@ -68,7 +68,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "cdk-ec2-key-pair": "^3.3.1",
+    "cdk-ec2-key-pair": "^3.3.2",
     "cdk-iam-floyd": "0.504.0",
     "glob": "^8.0.3"
   },
