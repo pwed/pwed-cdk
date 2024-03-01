@@ -126,7 +126,8 @@
       "description": "Runs eslint against the codebase",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools projenrc .projenrc.ts"
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
+          "receiveArgs": true
         }
       ]
     },
@@ -274,28 +275,13 @@
       },
       "steps": [
         {
-          "exec": "yarn upgrade npm-check-updates"
-        },
-        {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='aws-cdk-lib,cdk-iam-floyd,constructs,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='aws-cdk-lib,cdk-iam-floyd,constructs,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='aws-cdk-lib,cdk-iam-floyd,constructs,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='aws-cdk-lib,cdk-iam-floyd,constructs,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='aws-cdk-lib,cdk-iam-floyd,constructs,jsii'"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=cdk-iam-floyd,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jsii-diff,jsii-docgen,jsii-pacmak,jsii-rosetta,jsii,prettier,projen,ts-node,typescript,cdk-ec2-key-pair,glob"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade"
+          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-iam-floyd eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jest-junit jest jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier projen standard-version ts-jest ts-node typescript cdk-ec2-key-pair glob aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
